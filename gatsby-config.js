@@ -86,5 +86,6 @@ module.exports = {
     },
     `@contentful/gatsby-transformer-contentful-richtext`,
     `gatsby-plugin-typegen`,
+    `gatsby-plugin-material-ui`
   ],
 }
