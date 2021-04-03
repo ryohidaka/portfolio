@@ -12,6 +12,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               body {
                 raw
+                references {
+                  ... on ContentfulAsset {
+                    contentful_id
+                    __typename
+                    file {
+                      url
+                    }
+                  }
+                }
               }
             }
           }
