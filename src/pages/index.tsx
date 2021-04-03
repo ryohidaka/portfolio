@@ -5,7 +5,12 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
+type Props = {
+  data: any
+  location: string
+}
+
+const BlogIndex: React.FC<Props> = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
   return (

@@ -5,7 +5,13 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
+type Props = {
+  data: any
+  location: string
+  post: any
+}
+
+const BlogIndex: React.FC<Props> = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allContentfulBlogPost.edges
 
@@ -14,7 +20,7 @@ const BlogIndex = ({ data, location }) => {
       <SEO title="All posts" />
       <Bio />
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
+        {posts.map((post: { node: { title: string; slug: string } }) => {
           const title = post.node.title
 
           return (
