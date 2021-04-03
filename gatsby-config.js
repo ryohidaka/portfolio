@@ -137,5 +137,6 @@ module.exports = {
       },
     },
     `@contentful/gatsby-transformer-contentful-richtext`,
+    `gatsby-plugin-typegen`
   ],
 }
