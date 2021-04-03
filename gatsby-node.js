@@ -37,7 +37,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const PostTemplate = path.resolve(`./src/templates/blog-post.jsx`)
+  const PostTemplate = path.resolve(`./src/templates/blog-post.tsx`)
 
   result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
     createPage({
