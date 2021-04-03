@@ -136,5 +136,6 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    `@contentful/gatsby-transformer-contentful-richtext`,
   ],
 }
