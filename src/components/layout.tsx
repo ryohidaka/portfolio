@@ -1,16 +1,20 @@
 import * as React from "react"
 import Header from "./header"
 import Footer from "../components/footer"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import Container from "@material-ui/core/Container"
+import { CssBaseline, Container, Breadcrumbs, Link } from "@material-ui/core"
 
 type Props = {
-  location: string
   title: string
   children: any
+  crumbs: Crumb[]
 }
 
-const Layout: React.FC<Props> = ({ title, children }: Props) => {
+type Crumb = {
+  pathname: string
+  crumbLabel: string
+}
+
+const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
   const pageLink = [
     { name: "home", url: "/" },
     { name: "blog", url: "/blog" },
@@ -19,10 +23,21 @@ const Layout: React.FC<Props> = ({ title, children }: Props) => {
   return (
     <>
       <Header title={title} links={pageLink} />
-      <main>
+      <Container maxWidth="lg" component="main">
+        {crumbs.length > 1 && (
+          <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb: Crumb) => {
+              return (
+                <Link color="inherit" href={crumb.pathname} itemProp="url">
+                  {crumb.crumbLabel}
+                </Link>
+              )
+            })}
+          </Breadcrumbs>
+        )}
         <CssBaseline />
-        <Container maxWidth="sm">{children}</Container>
-      </main>
+        {children}
+      </Container>
       <Footer />
     </>
   )
