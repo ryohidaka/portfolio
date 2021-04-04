@@ -6,14 +6,17 @@ import SEO from "../components/seo"
 
 type Props = {
   data: any
-  location: string
+  pageContext: any
 }
 
-const NotFoundPage: React.FC<Props> = ({ data, location }: Props) => {
+const NotFoundPage: React.FC<Props> = ({ pageContext, data }: Props) => {
   const siteTitle = data.site.siteMetadata.title
+  const {
+    breadcrumb: { crumbs },
+  } = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout title={siteTitle} crumbs={crumbs}>
       <SEO title="404: Not Found" />
       <h1>404: Not Found</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>

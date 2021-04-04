@@ -311,6 +311,7 @@ type SitePage = Node & {
 
 type SitePageContext = {
   readonly post: Maybe<SitePageContextPost>;
+  readonly breadcrumb: Maybe<SitePageContextBreadcrumb>;
 };
 
 type SitePageContextPost = {
@@ -332,6 +333,16 @@ type SitePageContextPostBodyReferences = {
 
 type SitePageContextPostBodyReferencesFile = {
   readonly url: Maybe<Scalars['String']>;
+};
+
+type SitePageContextBreadcrumb = {
+  readonly location: Maybe<Scalars['String']>;
+  readonly crumbs: Maybe<ReadonlyArray<Maybe<SitePageContextBreadcrumbCrumbs>>>;
+};
+
+type SitePageContextBreadcrumbCrumbs = {
+  readonly pathname: Maybe<Scalars['String']>;
+  readonly crumbLabel: Maybe<Scalars['String']>;
 };
 
 type MarkdownHeading = {
@@ -1040,6 +1051,7 @@ type SitePluginPluginOptions = {
   readonly pageLimit: Maybe<Scalars['Int']>;
   readonly assetDownloadWorkers: Maybe<Scalars['Int']>;
   readonly useNameForId: Maybe<Scalars['Boolean']>;
+  readonly useAutoGen: Maybe<Scalars['Boolean']>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
   readonly isTSX: Maybe<Scalars['Boolean']>;
@@ -2355,6 +2367,7 @@ type SiteSortInput = {
 
 type SitePageContextFilterInput = {
   readonly post: Maybe<SitePageContextPostFilterInput>;
+  readonly breadcrumb: Maybe<SitePageContextBreadcrumbFilterInput>;
 };
 
 type SitePageContextPostFilterInput = {
@@ -2380,6 +2393,20 @@ type SitePageContextPostBodyReferencesFilterInput = {
 
 type SitePageContextPostBodyReferencesFileFilterInput = {
   readonly url: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextBreadcrumbFilterInput = {
+  readonly location: Maybe<StringQueryOperatorInput>;
+  readonly crumbs: Maybe<SitePageContextBreadcrumbCrumbsFilterListInput>;
+};
+
+type SitePageContextBreadcrumbCrumbsFilterListInput = {
+  readonly elemMatch: Maybe<SitePageContextBreadcrumbCrumbsFilterInput>;
+};
+
+type SitePageContextBreadcrumbCrumbsFilterInput = {
+  readonly pathname: Maybe<StringQueryOperatorInput>;
+  readonly crumbLabel: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginFilterInput = {
@@ -2440,6 +2467,7 @@ type SitePluginPluginOptionsFilterInput = {
   readonly pageLimit: Maybe<IntQueryOperatorInput>;
   readonly assetDownloadWorkers: Maybe<IntQueryOperatorInput>;
   readonly useNameForId: Maybe<BooleanQueryOperatorInput>;
+  readonly useAutoGen: Maybe<BooleanQueryOperatorInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
@@ -2640,6 +2668,10 @@ type SitePageFieldsEnum =
   | 'context.post.slug'
   | 'context.post.body.raw'
   | 'context.post.body.references'
+  | 'context.breadcrumb.location'
+  | 'context.breadcrumb.crumbs'
+  | 'context.breadcrumb.crumbs.pathname'
+  | 'context.breadcrumb.crumbs.crumbLabel'
   | 'pluginCreator.id'
   | 'pluginCreator.parent.id'
   | 'pluginCreator.parent.parent.id'
@@ -2729,6 +2761,7 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.pageLimit'
   | 'pluginCreator.pluginOptions.assetDownloadWorkers'
   | 'pluginCreator.pluginOptions.useNameForId'
+  | 'pluginCreator.pluginOptions.useAutoGen'
   | 'pluginCreator.pluginOptions.pathCheck'
   | 'pluginCreator.pluginOptions.allExtensions'
   | 'pluginCreator.pluginOptions.isTSX'
@@ -4372,6 +4405,7 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.pageLimit'
   | 'pluginOptions.assetDownloadWorkers'
   | 'pluginOptions.useNameForId'
+  | 'pluginOptions.useAutoGen'
   | 'pluginOptions.pathCheck'
   | 'pluginOptions.allExtensions'
   | 'pluginOptions.isTSX'
@@ -4410,11 +4444,6 @@ type SitePluginSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type usersryohidakaportfoliosrcpagesblogTsx1903698454QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type usersryohidakaportfoliosrcpagesblogTsx1903698454Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allContentfulBlogPost: { readonly edges: ReadonlyArray<{ readonly node: Pick<ContentfulBlogPost, 'title' | 'slug'> }> } };
-
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4423,10 +4452,15 @@ type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
     )> }> };
 
-type usersryohidakaportfoliosrcpages404Tsx3159585216QueryVariables = Exact<{ [key: string]: never; }>;
+type usersryohidakaportfoliosrcpagesblogTsx1903698454QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type usersryohidakaportfoliosrcpages404Tsx3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type usersryohidakaportfoliosrcpagesblogTsx1903698454Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allContentfulBlogPost: { readonly edges: ReadonlyArray<{ readonly node: Pick<ContentfulBlogPost, 'title' | 'slug'> }> } };
+
+type usersryohidakaportfoliosrcpagesindexTsx3159585216QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type usersryohidakaportfoliosrcpagesindexTsx3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -4474,15 +4508,15 @@ type GatsbyContentfulFluid_withWebpFragment = Pick<ContentfulFluid, 'base64' | '
 
 type GatsbyContentfulFluid_withWebp_noBase64Fragment = Pick<ContentfulFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
+type usersryohidakaportfoliosrcpages404Tsx3159585216QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type usersryohidakaportfoliosrcpages404Tsx3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type usersryohidakaportfoliosrcpagesindexTsx3159585216QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type usersryohidakaportfoliosrcpagesindexTsx3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

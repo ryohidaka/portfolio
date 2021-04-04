@@ -10,8 +10,9 @@ type Props = {
     nodeType: BLOCKS.DOCUMENT
     post: Post
     data: any
+    breadcrumb: any
   }
-  location: string
+  location: any
 }
 
 type Post = {
@@ -37,8 +38,12 @@ const CommonPostTemplate: React.FC<Props> = ({
   const { post } = pageContext
   const title = post.title
 
+  const {
+    breadcrumb: { crumbs },
+  } = pageContext
+
   return (
-    <Layout location={location} title={title}>
+    <Layout title={title} crumbs={crumbs}>
       <SEO title={title} />
       <Bio />
       <article>
