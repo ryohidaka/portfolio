@@ -80,5 +80,11 @@ module.exports = {
     `@contentful/gatsby-transformer-contentful-richtext`,
     `gatsby-plugin-typegen`,
     `gatsby-plugin-material-ui`,
+    {
+      resolve: `gatsby-plugin-breadcrumb`,
+      options: {
+        useAutoGen: true,
+      },
+    },
   ],
 }

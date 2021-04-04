@@ -6,15 +6,19 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 type Props = {
+  pageContext: any
   data: any
-  location: string
+  post: any
 }
 
-const BlogIndex: React.FC<Props> = ({ data, location }: Props) => {
+const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  const {
+    breadcrumb: { crumbs },
+  } = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout title={siteTitle} crumbs={crumbs}>
       <SEO title="All posts" />
       <Bio />
 
