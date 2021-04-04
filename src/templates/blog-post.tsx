@@ -1,4 +1,7 @@
 import React from "react"
+import Bio from "../components/bio"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
 
@@ -8,6 +11,7 @@ type Props = {
     post: Post
     data: any
   }
+  location: string
 }
 
 type Post = {
@@ -26,14 +30,22 @@ const options: any = {
   },
 }
 
-const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
+const CommonPostTemplate: React.FC<Props> = ({
+  pageContext,
+  location,
+}: Props) => {
   const { post } = pageContext
+  const title = post.title
 
   return (
-    <article>
-      <h1>{post.title}</h1>
-      {renderRichText(post.body, options)}
-    </article>
+    <Layout location={location} title={title}>
+      <SEO title={title} />
+      <Bio />
+      <article>
+        <h1>{title}</h1>
+        {renderRichText(post.body, options)}
+      </article>
+    </Layout>
   )
 }
 export default CommonPostTemplate
