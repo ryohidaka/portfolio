@@ -1,37 +1,31 @@
 import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import Header from "./header"
+import Footer from "../components/footer"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Container from "@material-ui/core/Container"
 
 type Props = {
   location: string
   title: string
-  children: React.ReactNode
+  children: any
 }
 
 const Layout: React.FC<Props> = ({ title, children }: Props) => {
-  let header
-
-  header = (
-    <h1 className="main-heading">
-      <Link to="/">{title}</Link>
-    </h1>
-  )
+  const pageLink = [
+    { name: "home", url: "/" },
+    { name: "blog", url: "/blog" },
+  ]
 
   return (
-    <div className="global-wrapper">
-      <header className="global-header">{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
-    </div>
+    <>
+      <Header title={title} links={pageLink} />
+      <main>
+        <CssBaseline />
+        <Container maxWidth="sm">{children}</Container>
+      </main>
+      <Footer />
+    </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout
