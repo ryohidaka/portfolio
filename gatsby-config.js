@@ -86,5 +86,6 @@ module.exports = {
         useAutoGen: true,
       },
     },
+    `gatsby-plugin-next-seo`,
   ],
 }
