@@ -92,6 +92,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   })
 
+  // Works詳細ページ
+  result.data.allContentfulWorks.edges.forEach(({ node }) => {
+    createPage({
+      path: `/works/${node.slug}`,
+      component: path.resolve(`./src/templates/work-post.tsx`),
+      context: {
+        post: node,
+      },
+    })
+  })
+
   exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
 
