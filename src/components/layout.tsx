@@ -17,6 +17,7 @@ type Crumb = {
 const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
   const pageLink = [
     { name: "home", url: "/" },
+    { name: "works", url: "/works" },
     { name: "blog", url: "/blog" },
   ]
 
@@ -28,7 +29,12 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
           <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb: Crumb) => {
               return (
-                <Link color="inherit" href={crumb.pathname} itemProp="url">
+                <Link
+                  color="inherit"
+                  key={crumb.pathname}
+                  href={crumb.pathname}
+                  itemProp="url"
+                >
                   {crumb.crumbLabel}
                 </Link>
               )
