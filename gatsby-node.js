@@ -37,12 +37,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const PostTemplate = path.resolve(`./src/templates/blog-post.tsx`)
+  // Blog一覧ページ
+  createPage({
+    path: `/blog`,
+    component: path.resolve(`./src/templates/blog.tsx`),
+    context: {
+      posts: result.data.allContentfulBlogPost.edges,
+    },
+  })
 
+  // Blog詳細ページ
   result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
     createPage({
       path: `/blog/${node.slug}`,
-      component: PostTemplate,
+      component: path.resolve(`./src/templates/blog-post.tsx`),
       context: {
         post: node,
       },
