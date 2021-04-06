@@ -25,7 +25,7 @@ const options: any = {
     [BLOCKS.EMBEDDED_ASSET]: (node: {
       data: { target: { file: { url: any } } }
     }) => {
-      const url = `http:${node.data.target.file.url}`
+      const url = node.data.target.file.url
       return <img src={url} />
     },
   },
