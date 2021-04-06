@@ -83,6 +83,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
+  // Works一覧ページ
+  createPage({
+    path: `/works`,
+    component: path.resolve(`./src/templates/works.tsx`),
+    context: {
+      posts: result.data.allContentfulWorks.edges,
+    },
+  })
+
   exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
 
