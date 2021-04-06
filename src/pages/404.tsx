@@ -1,12 +1,12 @@
 import * as React from "react"
-import { graphql, PageProps } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 type Props = {
-  data: any
   pageContext: any
+  data: any
 }
 
 const NotFoundPage: React.FC<Props> = ({ pageContext, data }: Props) => {

@@ -5,7 +5,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       query {
-        allContentfulBlogPost {
+        allContentfulBlogPost(filter: { slug: { ne: "dummy" } }) {
           edges {
             node {
               title
@@ -41,7 +41,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
     createPage({
-      /* 出力先のpath、利用するcomponent、渡すcontextつまりデータを指定する */
       path: `/blog/${node.slug}`,
       component: PostTemplate,
       context: {

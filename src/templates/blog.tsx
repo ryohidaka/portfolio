@@ -6,24 +6,29 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 type Props = {
-  pageContext: any
+  pageContext: {
+    posts: Post[]
+    breadcrumb: any
+  }
   data: any
-  post: any
+}
+
+type Post = {
+  node: {
+    title: string
+    slug: string
+  }
 }
 
 const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allContentfulBlogPost.edges
-  const {
-    breadcrumb: { crumbs },
-  } = pageContext
 
   return (
-    <Layout title={siteTitle} crumbs={crumbs}>
+    <Layout title={siteTitle} crumbs={pageContext.breadcrumb}>
       <SEO title="All posts" />
       <Bio />
       <ol style={{ listStyle: `none` }}>
-        {posts.map((post: { node: { title: string; slug: string } }) => {
+        {pageContext.posts.map((post: Post) => {
           const title = post.node.title
 
           return (
@@ -57,14 +62,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-      }
-    }
-    allContentfulBlogPost {
-      edges {
-        node {
-          title
-          slug
-        }
       }
     }
   }
