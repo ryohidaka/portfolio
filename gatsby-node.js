@@ -25,6 +25,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        allContentfulWorks(filter: { slug: { ne: "dummy" } }) {
+          edges {
+            node {
+              title
+              slug
+              description
+              eyecatch {
+                file {
+                  url
+                }
+              }
+              body {
+                raw
+                references {
+                  ... on ContentfulAsset {
+                    contentful_id
+                    __typename
+                    file {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     `
   )
