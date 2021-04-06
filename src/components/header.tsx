@@ -131,7 +131,7 @@ const Header: React.FC<Props> = ({ links }: Props) => {
         <div className={classes.menus}>
           {links.map(link => {
             return (
-              <Button color="inherit" component={Link} to={link.url}>
+              <Button color="inherit" key={link.url} component={Link} to={link.url}>
                 {link.name}
               </Button>
             )
@@ -161,7 +161,7 @@ const Header: React.FC<Props> = ({ links }: Props) => {
         <List>
           {links.map(link => {
             return (
-              <ListItem button key={link.name} component={Link} to={link.url}>
+              <ListItem button key={link.url} component={Link} to={link.url}>
                 <ListItemIcon></ListItemIcon>
                 <ListItemText primary={link.name} />
               </ListItem>
