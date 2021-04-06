@@ -25,6 +25,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        allContentfulWorks(filter: { slug: { ne: "dummy" } }) {
+          edges {
+            node {
+              title
+              slug
+              description
+              eyecatch {
+                file {
+                  url
+                }
+              }
+              body {
+                raw
+                references {
+                  ... on ContentfulAsset {
+                    contentful_id
+                    __typename
+                    file {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     `
   )
@@ -37,12 +63,40 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const PostTemplate = path.resolve(`./src/templates/blog-post.tsx`)
+  // Blog一覧ページ
+  createPage({
+    path: `/blog`,
+    component: path.resolve(`./src/templates/blog.tsx`),
+    context: {
+      posts: result.data.allContentfulBlogPost.edges,
+    },
+  })
 
+  // Blog詳細ページ
   result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
     createPage({
       path: `/blog/${node.slug}`,
-      component: PostTemplate,
+      component: path.resolve(`./src/templates/blog-post.tsx`),
+      context: {
+        post: node,
+      },
+    })
+  })
+
+  // Works一覧ページ
+  createPage({
+    path: `/works`,
+    component: path.resolve(`./src/templates/works.tsx`),
+    context: {
+      posts: result.data.allContentfulWorks.edges,
+    },
+  })
+
+  // Works詳細ページ
+  result.data.allContentfulWorks.edges.forEach(({ node }) => {
+    createPage({
+      path: `/works/${node.slug}`,
+      component: path.resolve(`./src/templates/work-post.tsx`),
       context: {
         post: node,
       },

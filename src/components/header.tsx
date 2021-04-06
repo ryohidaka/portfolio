@@ -131,7 +131,12 @@ const Header: React.FC<Props> = ({ links }: Props) => {
         <div className={classes.menus}>
           {links.map(link => {
             return (
-              <Button color="inherit" key={link.url} component={Link} to={link.url}>
+              <Button
+                color="inherit"
+                key={link.url}
+                component={Link}
+                to={link.url}
+              >
                 {link.name}
               </Button>
             )

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, PageProps } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -7,7 +7,6 @@ import SEO from "../components/seo"
 type Props = {
   pageContext: any
   data: any
-  post: any
 }
 
 const NotFoundPage: React.FC<Props> = ({ pageContext, data }: Props) => {

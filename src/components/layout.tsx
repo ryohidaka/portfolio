@@ -29,7 +29,12 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
           <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb: Crumb) => {
               return (
-                <Link color="inherit" key={crumb.pathname} href={crumb.pathname} itemProp="url">
+                <Link
+                  color="inherit"
+                  key={crumb.pathname}
+                  href={crumb.pathname}
+                  itemProp="url"
+                >
                   {crumb.crumbLabel}
                 </Link>
               )
