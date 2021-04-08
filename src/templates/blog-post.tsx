@@ -44,7 +44,7 @@ const CommonPostTemplate: React.FC<Props> = ({
 
   return (
     <Layout title={title} crumbs={crumbs}>
-      <SEO title={title} />
+      <SEO title={title} path={location.pathname} />
       <Bio />
       <article>
         <h1>{title}</h1>

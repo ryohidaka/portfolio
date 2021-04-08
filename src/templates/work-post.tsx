@@ -31,7 +31,10 @@ const options: any = {
   },
 }
 
-const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
+const CommonPostTemplate: React.FC<Props> = ({
+  pageContext,
+  location,
+}: Props) => {
   const { post } = pageContext
   const title = post.title
 
@@ -41,7 +44,10 @@ const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
 
   return (
     <Layout title={title} crumbs={crumbs}>
-      <SEO title={title} />
+      <SEO
+        title={title}
+        path={location.pathname}
+      />
       <Bio />
       <article>
         <h1>{title}</h1>

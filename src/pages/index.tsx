@@ -19,7 +19,7 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
 
   return (
     <Layout title={siteTitle} crumbs={crumbs}>
-      <SEO title="All posts" />
+      <SEO />
       <Bio />
 
       <Link to={"blog"} itemProp="url">

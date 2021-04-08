@@ -13,6 +13,7 @@ type Props = {
     breadcrumb: any
   }
   data: any
+  location: any
 }
 
 type Post = {
@@ -24,12 +25,12 @@ type Post = {
   }
 }
 
-const WorkIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
+const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
   return (
     <Layout title={siteTitle} crumbs={pageContext.breadcrumb}>
-      <SEO title="WORKS" />
+      <SEO title="WORKS" path={location.pathname} />
       <Bio />
       <Grid item xs={12}>
         <Grid container justify="space-between" spacing={4}>

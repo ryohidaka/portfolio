@@ -11,6 +11,7 @@ type Props = {
     breadcrumb: any
   }
   data: any
+  location: any
 }
 
 type Post = {
@@ -20,12 +21,12 @@ type Post = {
   }
 }
 
-const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
+const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
   return (
     <Layout title={siteTitle} crumbs={pageContext.breadcrumb}>
-      <SEO title="All posts" />
+      <SEO title="BLOG" path={location.pathname} />
       <Bio />
       <ol style={{ listStyle: `none` }}>
         {pageContext.posts.map((post: Post) => {
