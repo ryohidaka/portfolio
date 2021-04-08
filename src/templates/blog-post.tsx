@@ -10,7 +10,7 @@ type Props = {
     nodeType: BLOCKS.DOCUMENT
     post: Post
     data: any
-    breadcrumb: any
+    breadcrumb: { crumbs: Crumb[] }
   }
   location: any
 }
@@ -18,6 +18,11 @@ type Props = {
 type Post = {
   title: string
   body: any
+}
+
+type Crumb = {
+  pathname: string
+  crumbLabel: string
 }
 
 const options: any = {
