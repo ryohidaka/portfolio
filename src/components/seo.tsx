@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbySeo } from "gatsby-plugin-next-seo"
+import { GatsbySeo, LogoJsonLd } from "gatsby-plugin-next-seo"
 
 type metaType = Array<{
   property?: string
@@ -42,6 +42,7 @@ const SEO: React.FC<Props> = ({ description, title, image, path }: Props) => {
             social {
               twitter
             }
+            icon
           }
         }
       }
@@ -51,6 +52,7 @@ const SEO: React.FC<Props> = ({ description, title, image, path }: Props) => {
   const siteUrl = site.siteMetadata.siteUrl
   const metaDescription = description || site.siteMetadata.description
   const twitterId = site.siteMetadata?.social?.twitter || ``
+  const icon = site.siteMetadata?.icon
   path = path || ""
 
   return (
@@ -96,6 +98,8 @@ const SEO: React.FC<Props> = ({ description, title, image, path }: Props) => {
           cardType: "summary_large_image",
         }}
       />
+
+      <LogoJsonLd logo={`${siteUrl}${icon}`} url={siteUrl} />
     </>
   )
 }

@@ -12,6 +12,7 @@ module.exports = {
     social: {
       twitter: `ryhidaka`,
     },
+    icon: `/icon.png`,
   },
   plugins: [
     `gatsby-plugin-image`,
