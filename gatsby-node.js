@@ -45,6 +45,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                     file {
                       url
                     }
+                    title
                   }
                 }
               }

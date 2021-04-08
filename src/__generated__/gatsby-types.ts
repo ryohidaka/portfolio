@@ -235,8 +235,6 @@ declare namespace GatsbyTypes {
   type Site = Node & {
     readonly buildTime: Maybe<Scalars["Date"]>
     readonly siteMetadata: Maybe<SiteSiteMetadata>
-    readonly port: Maybe<Scalars["Int"]>
-    readonly host: Maybe<Scalars["String"]>
     readonly polyfill: Maybe<Scalars["Boolean"]>
     readonly pathPrefix: Maybe<Scalars["String"]>
     readonly id: Scalars["ID"]
@@ -287,14 +285,66 @@ declare namespace GatsbyTypes {
   }
 
   type SitePageContext = {
-    readonly post: Maybe<SitePageContextPost>
+    readonly posts: Maybe<ReadonlyArray<Maybe<SitePageContextPosts>>>
     readonly breadcrumb: Maybe<SitePageContextBreadcrumb>
+    readonly post: Maybe<SitePageContextPost>
+  }
+
+  type SitePageContextPosts = {
+    readonly node: Maybe<SitePageContextPostsNode>
+  }
+
+  type SitePageContextPostsNode = {
+    readonly title: Maybe<Scalars["String"]>
+    readonly slug: Maybe<Scalars["String"]>
+    readonly body: Maybe<SitePageContextPostsNodeBody>
+    readonly description: Maybe<Scalars["String"]>
+    readonly eyecatch: Maybe<SitePageContextPostsNodeEyecatch>
+  }
+
+  type SitePageContextPostsNodeBody = {
+    readonly raw: Maybe<Scalars["String"]>
+    readonly references: Maybe<
+      ReadonlyArray<Maybe<SitePageContextPostsNodeBodyReferences>>
+    >
+  }
+
+  type SitePageContextPostsNodeBodyReferences = {
+    readonly contentful_id: Maybe<Scalars["String"]>
+    readonly _xtypename: Maybe<Scalars["String"]>
+    readonly file: Maybe<SitePageContextPostsNodeBodyReferencesFile>
+  }
+
+  type SitePageContextPostsNodeBodyReferencesFile = {
+    readonly url: Maybe<Scalars["String"]>
+  }
+
+  type SitePageContextPostsNodeEyecatch = {
+    readonly file: Maybe<SitePageContextPostsNodeEyecatchFile>
+  }
+
+  type SitePageContextPostsNodeEyecatchFile = {
+    readonly url: Maybe<Scalars["String"]>
+  }
+
+  type SitePageContextBreadcrumb = {
+    readonly location: Maybe<Scalars["String"]>
+    readonly crumbs: Maybe<
+      ReadonlyArray<Maybe<SitePageContextBreadcrumbCrumbs>>
+    >
+  }
+
+  type SitePageContextBreadcrumbCrumbs = {
+    readonly pathname: Maybe<Scalars["String"]>
+    readonly crumbLabel: Maybe<Scalars["String"]>
   }
 
   type SitePageContextPost = {
     readonly title: Maybe<Scalars["String"]>
     readonly slug: Maybe<Scalars["String"]>
     readonly body: Maybe<SitePageContextPostBody>
+    readonly description: Maybe<Scalars["String"]>
+    readonly eyecatch: Maybe<SitePageContextPostEyecatch>
   }
 
   type SitePageContextPostBody = {
@@ -314,16 +364,12 @@ declare namespace GatsbyTypes {
     readonly url: Maybe<Scalars["String"]>
   }
 
-  type SitePageContextBreadcrumb = {
-    readonly location: Maybe<Scalars["String"]>
-    readonly crumbs: Maybe<
-      ReadonlyArray<Maybe<SitePageContextBreadcrumbCrumbs>>
-    >
+  type SitePageContextPostEyecatch = {
+    readonly file: Maybe<SitePageContextPostEyecatchFile>
   }
 
-  type SitePageContextBreadcrumbCrumbs = {
-    readonly pathname: Maybe<Scalars["String"]>
-    readonly crumbLabel: Maybe<Scalars["String"]>
+  type SitePageContextPostEyecatchFile = {
+    readonly url: Maybe<Scalars["String"]>
   }
 
   type MarkdownHeading = {
@@ -789,12 +835,18 @@ declare namespace GatsbyTypes {
       readonly contentful_id: Scalars["String"]
       readonly id: Scalars["ID"]
       readonly node_locale: Scalars["String"]
-      readonly slug: Maybe<Scalars["String"]>
       readonly title: Maybe<Scalars["String"]>
+      readonly slug: Maybe<Scalars["String"]>
+      readonly description: Maybe<Scalars["String"]>
+      readonly body: Maybe<ContentfulWorksBody>
+      readonly eyecatch: Maybe<ContentfulAsset>
       readonly spaceId: Maybe<Scalars["String"]>
       readonly createdAt: Maybe<Scalars["Date"]>
       readonly updatedAt: Maybe<Scalars["Date"]>
       readonly sys: Maybe<ContentfulWorksSys>
+      readonly framework: Maybe<ReadonlyArray<Maybe<Scalars["String"]>>>
+      readonly logo: Maybe<ContentfulAsset>
+      readonly publishedAt: Maybe<Scalars["Date"]>
       readonly parent: Maybe<Node>
       readonly children: ReadonlyArray<Node>
       readonly internal: Internal
@@ -812,6 +864,18 @@ declare namespace GatsbyTypes {
     fromNow: Maybe<Scalars["Boolean"]>
     difference: Maybe<Scalars["String"]>
     locale: Maybe<Scalars["String"]>
+  }
+
+  type ContentfulWorks_publishedAtArgs = {
+    formatString: Maybe<Scalars["String"]>
+    fromNow: Maybe<Scalars["Boolean"]>
+    difference: Maybe<Scalars["String"]>
+    locale: Maybe<Scalars["String"]>
+  }
+
+  type ContentfulWorksBody = {
+    readonly raw: Maybe<Scalars["String"]>
+    readonly references: Maybe<ReadonlyArray<Maybe<ContentfulAsset>>>
   }
 
   type ContentfulWorksSys = {
@@ -1169,8 +1233,6 @@ declare namespace GatsbyTypes {
   type Query_siteArgs = {
     buildTime: Maybe<DateQueryOperatorInput>
     siteMetadata: Maybe<SiteSiteMetadataFilterInput>
-    port: Maybe<IntQueryOperatorInput>
-    host: Maybe<StringQueryOperatorInput>
     polyfill: Maybe<BooleanQueryOperatorInput>
     pathPrefix: Maybe<StringQueryOperatorInput>
     id: Maybe<StringQueryOperatorInput>
@@ -1298,12 +1360,18 @@ declare namespace GatsbyTypes {
     contentful_id: Maybe<StringQueryOperatorInput>
     id: Maybe<StringQueryOperatorInput>
     node_locale: Maybe<StringQueryOperatorInput>
-    slug: Maybe<StringQueryOperatorInput>
     title: Maybe<StringQueryOperatorInput>
+    slug: Maybe<StringQueryOperatorInput>
+    description: Maybe<StringQueryOperatorInput>
+    body: Maybe<ContentfulWorksBodyFilterInput>
+    eyecatch: Maybe<ContentfulAssetFilterInput>
     spaceId: Maybe<StringQueryOperatorInput>
     createdAt: Maybe<DateQueryOperatorInput>
     updatedAt: Maybe<DateQueryOperatorInput>
     sys: Maybe<ContentfulWorksSysFilterInput>
+    framework: Maybe<StringQueryOperatorInput>
+    logo: Maybe<ContentfulAssetFilterInput>
+    publishedAt: Maybe<DateQueryOperatorInput>
     parent: Maybe<NodeFilterInput>
     children: Maybe<NodeFilterListInput>
     internal: Maybe<InternalFilterInput>
@@ -2141,8 +2209,6 @@ declare namespace GatsbyTypes {
     | "siteMetadata.author.summary"
     | "siteMetadata.siteUrl"
     | "siteMetadata.social.twitter"
-    | "port"
-    | "host"
     | "polyfill"
     | "pathPrefix"
     | "id"
@@ -2244,8 +2310,6 @@ declare namespace GatsbyTypes {
   type SiteFilterInput = {
     readonly buildTime: Maybe<DateQueryOperatorInput>
     readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>
-    readonly port: Maybe<IntQueryOperatorInput>
-    readonly host: Maybe<StringQueryOperatorInput>
     readonly polyfill: Maybe<BooleanQueryOperatorInput>
     readonly pathPrefix: Maybe<StringQueryOperatorInput>
     readonly id: Maybe<StringQueryOperatorInput>
@@ -2260,14 +2324,74 @@ declare namespace GatsbyTypes {
   }
 
   type SitePageContextFilterInput = {
-    readonly post: Maybe<SitePageContextPostFilterInput>
+    readonly posts: Maybe<SitePageContextPostsFilterListInput>
     readonly breadcrumb: Maybe<SitePageContextBreadcrumbFilterInput>
+    readonly post: Maybe<SitePageContextPostFilterInput>
+  }
+
+  type SitePageContextPostsFilterListInput = {
+    readonly elemMatch: Maybe<SitePageContextPostsFilterInput>
+  }
+
+  type SitePageContextPostsFilterInput = {
+    readonly node: Maybe<SitePageContextPostsNodeFilterInput>
+  }
+
+  type SitePageContextPostsNodeFilterInput = {
+    readonly title: Maybe<StringQueryOperatorInput>
+    readonly slug: Maybe<StringQueryOperatorInput>
+    readonly body: Maybe<SitePageContextPostsNodeBodyFilterInput>
+    readonly description: Maybe<StringQueryOperatorInput>
+    readonly eyecatch: Maybe<SitePageContextPostsNodeEyecatchFilterInput>
+  }
+
+  type SitePageContextPostsNodeBodyFilterInput = {
+    readonly raw: Maybe<StringQueryOperatorInput>
+    readonly references: Maybe<SitePageContextPostsNodeBodyReferencesFilterListInput>
+  }
+
+  type SitePageContextPostsNodeBodyReferencesFilterListInput = {
+    readonly elemMatch: Maybe<SitePageContextPostsNodeBodyReferencesFilterInput>
+  }
+
+  type SitePageContextPostsNodeBodyReferencesFilterInput = {
+    readonly contentful_id: Maybe<StringQueryOperatorInput>
+    readonly _xtypename: Maybe<StringQueryOperatorInput>
+    readonly file: Maybe<SitePageContextPostsNodeBodyReferencesFileFilterInput>
+  }
+
+  type SitePageContextPostsNodeBodyReferencesFileFilterInput = {
+    readonly url: Maybe<StringQueryOperatorInput>
+  }
+
+  type SitePageContextPostsNodeEyecatchFilterInput = {
+    readonly file: Maybe<SitePageContextPostsNodeEyecatchFileFilterInput>
+  }
+
+  type SitePageContextPostsNodeEyecatchFileFilterInput = {
+    readonly url: Maybe<StringQueryOperatorInput>
+  }
+
+  type SitePageContextBreadcrumbFilterInput = {
+    readonly location: Maybe<StringQueryOperatorInput>
+    readonly crumbs: Maybe<SitePageContextBreadcrumbCrumbsFilterListInput>
+  }
+
+  type SitePageContextBreadcrumbCrumbsFilterListInput = {
+    readonly elemMatch: Maybe<SitePageContextBreadcrumbCrumbsFilterInput>
+  }
+
+  type SitePageContextBreadcrumbCrumbsFilterInput = {
+    readonly pathname: Maybe<StringQueryOperatorInput>
+    readonly crumbLabel: Maybe<StringQueryOperatorInput>
   }
 
   type SitePageContextPostFilterInput = {
     readonly title: Maybe<StringQueryOperatorInput>
     readonly slug: Maybe<StringQueryOperatorInput>
     readonly body: Maybe<SitePageContextPostBodyFilterInput>
+    readonly description: Maybe<StringQueryOperatorInput>
+    readonly eyecatch: Maybe<SitePageContextPostEyecatchFilterInput>
   }
 
   type SitePageContextPostBodyFilterInput = {
@@ -2289,18 +2413,12 @@ declare namespace GatsbyTypes {
     readonly url: Maybe<StringQueryOperatorInput>
   }
 
-  type SitePageContextBreadcrumbFilterInput = {
-    readonly location: Maybe<StringQueryOperatorInput>
-    readonly crumbs: Maybe<SitePageContextBreadcrumbCrumbsFilterListInput>
+  type SitePageContextPostEyecatchFilterInput = {
+    readonly file: Maybe<SitePageContextPostEyecatchFileFilterInput>
   }
 
-  type SitePageContextBreadcrumbCrumbsFilterListInput = {
-    readonly elemMatch: Maybe<SitePageContextBreadcrumbCrumbsFilterInput>
-  }
-
-  type SitePageContextBreadcrumbCrumbsFilterInput = {
-    readonly pathname: Maybe<StringQueryOperatorInput>
-    readonly crumbLabel: Maybe<StringQueryOperatorInput>
+  type SitePageContextPostEyecatchFileFilterInput = {
+    readonly url: Maybe<StringQueryOperatorInput>
   }
 
   type SitePluginFilterInput = {
@@ -2556,14 +2674,19 @@ declare namespace GatsbyTypes {
     | "internal.owner"
     | "internal.type"
     | "isCreatedByStatefulCreatePages"
-    | "context.post.title"
-    | "context.post.slug"
-    | "context.post.body.raw"
-    | "context.post.body.references"
+    | "context.posts"
+    | "context.posts.node.title"
+    | "context.posts.node.slug"
+    | "context.posts.node.description"
     | "context.breadcrumb.location"
     | "context.breadcrumb.crumbs"
     | "context.breadcrumb.crumbs.pathname"
     | "context.breadcrumb.crumbs.crumbLabel"
+    | "context.post.title"
+    | "context.post.slug"
+    | "context.post.body.raw"
+    | "context.post.body.references"
+    | "context.post.description"
     | "pluginCreator.id"
     | "pluginCreator.parent.id"
     | "pluginCreator.parent.parent.id"
@@ -3419,6 +3542,15 @@ declare namespace GatsbyTypes {
     readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>
   }
 
+  type ContentfulWorksBodyFilterInput = {
+    readonly raw: Maybe<StringQueryOperatorInput>
+    readonly references: Maybe<ContentfulAssetFilterListInput>
+  }
+
+  type ContentfulAssetFilterListInput = {
+    readonly elemMatch: Maybe<ContentfulAssetFilterInput>
+  }
+
   type ContentfulWorksSysFilterInput = {
     readonly type: Maybe<StringQueryOperatorInput>
     readonly revision: Maybe<IntQueryOperatorInput>
@@ -3464,8 +3596,136 @@ declare namespace GatsbyTypes {
     | "contentful_id"
     | "id"
     | "node_locale"
-    | "slug"
     | "title"
+    | "slug"
+    | "description"
+    | "body.raw"
+    | "body.references"
+    | "body.references.contentful_id"
+    | "body.references.id"
+    | "body.references.spaceId"
+    | "body.references.createdAt"
+    | "body.references.updatedAt"
+    | "body.references.file.url"
+    | "body.references.file.fileName"
+    | "body.references.file.contentType"
+    | "body.references.title"
+    | "body.references.description"
+    | "body.references.node_locale"
+    | "body.references.sys.type"
+    | "body.references.sys.revision"
+    | "body.references.fixed.base64"
+    | "body.references.fixed.tracedSVG"
+    | "body.references.fixed.aspectRatio"
+    | "body.references.fixed.width"
+    | "body.references.fixed.height"
+    | "body.references.fixed.src"
+    | "body.references.fixed.srcSet"
+    | "body.references.fixed.srcWebp"
+    | "body.references.fixed.srcSetWebp"
+    | "body.references.fluid.base64"
+    | "body.references.fluid.tracedSVG"
+    | "body.references.fluid.aspectRatio"
+    | "body.references.fluid.src"
+    | "body.references.fluid.srcSet"
+    | "body.references.fluid.srcWebp"
+    | "body.references.fluid.srcSetWebp"
+    | "body.references.fluid.sizes"
+    | "body.references.gatsbyImageData"
+    | "body.references.resize.base64"
+    | "body.references.resize.tracedSVG"
+    | "body.references.resize.src"
+    | "body.references.resize.width"
+    | "body.references.resize.height"
+    | "body.references.resize.aspectRatio"
+    | "body.references.parent.id"
+    | "body.references.parent.children"
+    | "body.references.children"
+    | "body.references.children.id"
+    | "body.references.children.children"
+    | "body.references.internal.content"
+    | "body.references.internal.contentDigest"
+    | "body.references.internal.description"
+    | "body.references.internal.fieldOwners"
+    | "body.references.internal.ignoreType"
+    | "body.references.internal.mediaType"
+    | "body.references.internal.owner"
+    | "body.references.internal.type"
+    | "eyecatch.contentful_id"
+    | "eyecatch.id"
+    | "eyecatch.spaceId"
+    | "eyecatch.createdAt"
+    | "eyecatch.updatedAt"
+    | "eyecatch.file.url"
+    | "eyecatch.file.details.size"
+    | "eyecatch.file.fileName"
+    | "eyecatch.file.contentType"
+    | "eyecatch.title"
+    | "eyecatch.description"
+    | "eyecatch.node_locale"
+    | "eyecatch.sys.type"
+    | "eyecatch.sys.revision"
+    | "eyecatch.fixed.base64"
+    | "eyecatch.fixed.tracedSVG"
+    | "eyecatch.fixed.aspectRatio"
+    | "eyecatch.fixed.width"
+    | "eyecatch.fixed.height"
+    | "eyecatch.fixed.src"
+    | "eyecatch.fixed.srcSet"
+    | "eyecatch.fixed.srcWebp"
+    | "eyecatch.fixed.srcSetWebp"
+    | "eyecatch.fluid.base64"
+    | "eyecatch.fluid.tracedSVG"
+    | "eyecatch.fluid.aspectRatio"
+    | "eyecatch.fluid.src"
+    | "eyecatch.fluid.srcSet"
+    | "eyecatch.fluid.srcWebp"
+    | "eyecatch.fluid.srcSetWebp"
+    | "eyecatch.fluid.sizes"
+    | "eyecatch.gatsbyImageData"
+    | "eyecatch.resize.base64"
+    | "eyecatch.resize.tracedSVG"
+    | "eyecatch.resize.src"
+    | "eyecatch.resize.width"
+    | "eyecatch.resize.height"
+    | "eyecatch.resize.aspectRatio"
+    | "eyecatch.parent.id"
+    | "eyecatch.parent.parent.id"
+    | "eyecatch.parent.parent.children"
+    | "eyecatch.parent.children"
+    | "eyecatch.parent.children.id"
+    | "eyecatch.parent.children.children"
+    | "eyecatch.parent.internal.content"
+    | "eyecatch.parent.internal.contentDigest"
+    | "eyecatch.parent.internal.description"
+    | "eyecatch.parent.internal.fieldOwners"
+    | "eyecatch.parent.internal.ignoreType"
+    | "eyecatch.parent.internal.mediaType"
+    | "eyecatch.parent.internal.owner"
+    | "eyecatch.parent.internal.type"
+    | "eyecatch.children"
+    | "eyecatch.children.id"
+    | "eyecatch.children.parent.id"
+    | "eyecatch.children.parent.children"
+    | "eyecatch.children.children"
+    | "eyecatch.children.children.id"
+    | "eyecatch.children.children.children"
+    | "eyecatch.children.internal.content"
+    | "eyecatch.children.internal.contentDigest"
+    | "eyecatch.children.internal.description"
+    | "eyecatch.children.internal.fieldOwners"
+    | "eyecatch.children.internal.ignoreType"
+    | "eyecatch.children.internal.mediaType"
+    | "eyecatch.children.internal.owner"
+    | "eyecatch.children.internal.type"
+    | "eyecatch.internal.content"
+    | "eyecatch.internal.contentDigest"
+    | "eyecatch.internal.description"
+    | "eyecatch.internal.fieldOwners"
+    | "eyecatch.internal.ignoreType"
+    | "eyecatch.internal.mediaType"
+    | "eyecatch.internal.owner"
+    | "eyecatch.internal.type"
     | "spaceId"
     | "createdAt"
     | "updatedAt"
@@ -3474,6 +3734,83 @@ declare namespace GatsbyTypes {
     | "sys.contentType.sys.type"
     | "sys.contentType.sys.linkType"
     | "sys.contentType.sys.id"
+    | "framework"
+    | "logo.contentful_id"
+    | "logo.id"
+    | "logo.spaceId"
+    | "logo.createdAt"
+    | "logo.updatedAt"
+    | "logo.file.url"
+    | "logo.file.details.size"
+    | "logo.file.fileName"
+    | "logo.file.contentType"
+    | "logo.title"
+    | "logo.description"
+    | "logo.node_locale"
+    | "logo.sys.type"
+    | "logo.sys.revision"
+    | "logo.fixed.base64"
+    | "logo.fixed.tracedSVG"
+    | "logo.fixed.aspectRatio"
+    | "logo.fixed.width"
+    | "logo.fixed.height"
+    | "logo.fixed.src"
+    | "logo.fixed.srcSet"
+    | "logo.fixed.srcWebp"
+    | "logo.fixed.srcSetWebp"
+    | "logo.fluid.base64"
+    | "logo.fluid.tracedSVG"
+    | "logo.fluid.aspectRatio"
+    | "logo.fluid.src"
+    | "logo.fluid.srcSet"
+    | "logo.fluid.srcWebp"
+    | "logo.fluid.srcSetWebp"
+    | "logo.fluid.sizes"
+    | "logo.gatsbyImageData"
+    | "logo.resize.base64"
+    | "logo.resize.tracedSVG"
+    | "logo.resize.src"
+    | "logo.resize.width"
+    | "logo.resize.height"
+    | "logo.resize.aspectRatio"
+    | "logo.parent.id"
+    | "logo.parent.parent.id"
+    | "logo.parent.parent.children"
+    | "logo.parent.children"
+    | "logo.parent.children.id"
+    | "logo.parent.children.children"
+    | "logo.parent.internal.content"
+    | "logo.parent.internal.contentDigest"
+    | "logo.parent.internal.description"
+    | "logo.parent.internal.fieldOwners"
+    | "logo.parent.internal.ignoreType"
+    | "logo.parent.internal.mediaType"
+    | "logo.parent.internal.owner"
+    | "logo.parent.internal.type"
+    | "logo.children"
+    | "logo.children.id"
+    | "logo.children.parent.id"
+    | "logo.children.parent.children"
+    | "logo.children.children"
+    | "logo.children.children.id"
+    | "logo.children.children.children"
+    | "logo.children.internal.content"
+    | "logo.children.internal.contentDigest"
+    | "logo.children.internal.description"
+    | "logo.children.internal.fieldOwners"
+    | "logo.children.internal.ignoreType"
+    | "logo.children.internal.mediaType"
+    | "logo.children.internal.owner"
+    | "logo.children.internal.type"
+    | "logo.internal.content"
+    | "logo.internal.contentDigest"
+    | "logo.internal.description"
+    | "logo.internal.fieldOwners"
+    | "logo.internal.ignoreType"
+    | "logo.internal.mediaType"
+    | "logo.internal.owner"
+    | "logo.internal.type"
+    | "publishedAt"
     | "parent.id"
     | "parent.parent.id"
     | "parent.parent.parent.id"
@@ -3573,12 +3910,18 @@ declare namespace GatsbyTypes {
     readonly contentful_id: Maybe<StringQueryOperatorInput>
     readonly id: Maybe<StringQueryOperatorInput>
     readonly node_locale: Maybe<StringQueryOperatorInput>
-    readonly slug: Maybe<StringQueryOperatorInput>
     readonly title: Maybe<StringQueryOperatorInput>
+    readonly slug: Maybe<StringQueryOperatorInput>
+    readonly description: Maybe<StringQueryOperatorInput>
+    readonly body: Maybe<ContentfulWorksBodyFilterInput>
+    readonly eyecatch: Maybe<ContentfulAssetFilterInput>
     readonly spaceId: Maybe<StringQueryOperatorInput>
     readonly createdAt: Maybe<DateQueryOperatorInput>
     readonly updatedAt: Maybe<DateQueryOperatorInput>
     readonly sys: Maybe<ContentfulWorksSysFilterInput>
+    readonly framework: Maybe<StringQueryOperatorInput>
+    readonly logo: Maybe<ContentfulAssetFilterInput>
+    readonly publishedAt: Maybe<DateQueryOperatorInput>
     readonly parent: Maybe<NodeFilterInput>
     readonly children: Maybe<NodeFilterListInput>
     readonly internal: Maybe<InternalFilterInput>
@@ -3592,10 +3935,6 @@ declare namespace GatsbyTypes {
   type ContentfulBlogPostBodyFilterInput = {
     readonly raw: Maybe<StringQueryOperatorInput>
     readonly references: Maybe<ContentfulAssetFilterListInput>
-  }
-
-  type ContentfulAssetFilterListInput = {
-    readonly elemMatch: Maybe<ContentfulAssetFilterInput>
   }
 
   type ContentfulBlogPostSysFilterInput = {
@@ -4324,35 +4663,6 @@ declare namespace GatsbyTypes {
 
   type Unnamed_1_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "title" | "description"> & {
-          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
-        }
-      >
-    }>
-  }
-
-  type usersryohidakaportfoliosrcpagesblogTsx1903698454QueryVariables = Exact<{
-    [key: string]: never
-  }>
-
-  type usersryohidakaportfoliosrcpagesblogTsx1903698454Query = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
-    }>
-    readonly allContentfulBlogPost: {
-      readonly edges: ReadonlyArray<{
-        readonly node: Pick<ContentfulBlogPost, "title" | "slug">
-      }>
-    }
-  }
-
-  type usersryohidakaportfoliosrcpagesindexTsx3159585216QueryVariables = Exact<{
-    [key: string]: never
-  }>
-
-  type usersryohidakaportfoliosrcpagesindexTsx3159585216Query = {
-    readonly site: Maybe<{
       readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
     }>
   }
@@ -4496,22 +4806,40 @@ declare namespace GatsbyTypes {
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
 
-  type usersryohidakaportfoliosrcpages404Tsx3159585216QueryVariables = Exact<{
-    [key: string]: never
-  }>
+  type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>
 
-  type usersryohidakaportfoliosrcpages404Tsx3159585216Query = {
+  type Unnamed_2_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl"> & {
+          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
+        }
+      >
+    }>
+  }
+
+  type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_3_Query = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
     }>
   }
 
-  type PagesQueryQueryVariables = Exact<{ [key: string]: never }>
+  type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>
 
-  type PagesQueryQuery = {
-    readonly allSitePage: {
-      readonly nodes: ReadonlyArray<Pick<SitePage, "path">>
-    }
+  type Unnamed_4_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+    }>
+  }
+
+  type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_5_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+    }>
   }
 
   type BioQueryQueryVariables = Exact<{ [key: string]: never }>

@@ -17,7 +17,9 @@ type Props = {
 
 type Post = {
   title: string
+  description: string
   body: any
+  eyecatch: { file: { url: string }; title: string }
 }
 
 const options: any = {
@@ -37,6 +39,11 @@ const CommonPostTemplate: React.FC<Props> = ({
 }: Props) => {
   const { post } = pageContext
   const title = post.title
+  const description = post.description
+  const eyecatch = {
+    url: `https:${post.eyecatch.file.url}`,
+    alt: post.eyecatch.title,
+  }
 
   const {
     breadcrumb: { crumbs },
@@ -46,6 +53,8 @@ const CommonPostTemplate: React.FC<Props> = ({
     <Layout title={title} crumbs={crumbs}>
       <SEO
         title={title}
+        description={description}
+        image={eyecatch}
         path={location.pathname}
       />
       <Bio />
