@@ -12,20 +12,22 @@ type Crumb = {
 
 const Breadcrumb: React.FC<Props> = ({ crumbs }: Props) => {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      {crumbs.map((crumb: Crumb) => {
-        return (
-          <Link
-            color="inherit"
-            key={crumb.pathname}
-            href={crumb.pathname}
-            itemProp="url"
-          >
-            {crumb.crumbLabel}
-          </Link>
-        )
-      })}
-    </Breadcrumbs>
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        {crumbs.map((crumb: Crumb) => {
+          return (
+            <Link
+              color="inherit"
+              key={crumb.pathname}
+              href={crumb.pathname}
+              itemProp="url"
+            >
+              {crumb.crumbLabel}
+            </Link>
+          )
+        })}
+      </Breadcrumbs>
+    </>
   )
 }
 
