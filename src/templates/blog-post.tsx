@@ -47,6 +47,9 @@ const CommonPostTemplate: React.FC<Props> = ({
     breadcrumb: { crumbs },
   } = pageContext
 
+  // 記事ページはパンくずリストのタイトルを記事タイトルに
+  crumbs[2].crumbLabel = title
+
   return (
     <Layout title={title} crumbs={crumbs}>
       <SEO title={title} path={location.pathname} />
