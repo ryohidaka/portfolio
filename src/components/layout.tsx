@@ -26,7 +26,7 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
     <>
       <Header title={title} links={pageLink} />
       <Container maxWidth="lg" component="main">
-        {crumbs.length > 1 && <Breadcrumbs crumbs={crumbs} />}
+        <Breadcrumbs crumbs={crumbs} />
         <CssBaseline />
         {children}
       </Container>
