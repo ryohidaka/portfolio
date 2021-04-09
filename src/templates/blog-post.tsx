@@ -1,5 +1,4 @@
 import React from "react"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import BlogPostJsonld from "../components/jsonld/blog-post"
@@ -55,7 +54,6 @@ const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
   return (
     <Layout title={title} crumbs={crumbs}>
       <SEO title={title} />
-      <Bio />
       <article>
         <h1>{title}</h1>
         {renderRichText(post.body, options)}

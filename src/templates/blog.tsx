@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -34,7 +33,6 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   return (
     <Layout title={siteTitle} crumbs={crumbs}>
       <SEO title="BLOG" path={location.pathname} />
-      <Bio />
       <ol style={{ listStyle: `none` }}>
         {pageContext.posts.map((post: Post) => {
           const title = post.node.title
