@@ -2,9 +2,11 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Breadcrumbs, Link } from "@material-ui/core"
 import { BreadcrumbJsonLd } from "gatsby-plugin-next-seo"
+import SectionTitle from "../components/section-title"
 
 type Props = {
   crumbs: Crumb[]
+  title?: string
 }
 
 type Crumb = {
@@ -19,7 +21,7 @@ type Payload = {
   position: number
 }
 
-const Breadcrumb: React.FC<Props> = ({ crumbs }: Props) => {
+const Breadcrumb: React.FC<Props> = ({ crumbs, title }: Props) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -50,6 +52,8 @@ const Breadcrumb: React.FC<Props> = ({ crumbs }: Props) => {
 
   return (
     <>
+      {crumbs.length > 1 && title && <SectionTitle title={title} />}
+
       {crumbs.length > 1 && (
         <Breadcrumbs aria-label="breadcrumb">
           {crumbs.map((crumb: Crumb) => {

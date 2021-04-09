@@ -6,11 +6,7 @@ type Props = {
 }
 
 const SectionTitle: React.FC<Props> = ({ title, id }: Props) => {
-  return (
-    <div className="bio">
-      <h1 id={id || ""}>{title}</h1>
-    </div>
-  )
+  return <h1 id={id || ""}>{title}</h1>
 }
 
 export default SectionTitle

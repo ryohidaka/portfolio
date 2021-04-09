@@ -37,7 +37,7 @@ const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   } = pageContext
 
   return (
-    <Layout title={siteTitle} crumbs={crumbs}>
+    <Layout title="WORKS" crumbs={crumbs}>
       <SEO title="WORKS" path={location.pathname} />
       <Grid item xs={12}>
         <Grid container justify="space-between" spacing={4}>

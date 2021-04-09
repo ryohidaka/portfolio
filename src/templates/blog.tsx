@@ -31,7 +31,7 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
     breadcrumb: { crumbs },
   } = pageContext
   return (
-    <Layout title={siteTitle} crumbs={crumbs}>
+    <Layout title="BLOG" crumbs={crumbs}>
       <SEO title="BLOG" path={location.pathname} />
       <ol style={{ listStyle: `none` }}>
         {pageContext.posts.map((post: Post) => {
