@@ -54,7 +54,10 @@ const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
   return (
     <Layout title={title} crumbs={crumbs}>
       <SEO title={title} />
-      <article>{renderRichText(post.body, options)}</article>
+      <article>
+        <h1>{title}</h1>
+        {renderRichText(post.body, options)}
+      </article>
 
       {/* 構造化マークアップ */}
       <BlogPostJsonld post={post} />
