@@ -73,6 +73,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   createPage({
     path: `/`,
     component: path.resolve(`./src/templates/index.tsx`),
+    context: {
+      works: result.data.allContentfulWorks.edges,
+    },
   })
 
   // Blog一覧ページ

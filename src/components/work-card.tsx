@@ -38,7 +38,7 @@ export const WorkCard: React.FC<Props> = ({ work }: Props) => {
     <Card className={classes.root} id={work.slug}>
       <CardActionArea
         component={Link}
-        to={work.slug}
+        to={`/works/${work.slug}`}
         className={classes.action}
       >
         <CardMedia
