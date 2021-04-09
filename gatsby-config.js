@@ -88,5 +88,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-next-seo`,
+    `gatsby-plugin-sitemap`,
   ],
 }
