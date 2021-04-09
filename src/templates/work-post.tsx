@@ -2,6 +2,7 @@ import React from "react"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import WorksJsonld from "../components/jsonld/works"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
 
@@ -20,6 +21,9 @@ type Post = {
   description: string
   body: any
   eyecatch: { file: { url: string }; title: string }
+  createdAt: string
+  published_at?: string
+  updatedAt: string
 }
 
 type Crumb = {
@@ -70,6 +74,9 @@ const CommonPostTemplate: React.FC<Props> = ({
         <h1>{title}</h1>
         {renderRichText(post.body, options)}
       </article>
+      
+      {/* 構造化マークアップ */}
+      <WorksJsonld post={post} />
     </Layout>
   )
 }

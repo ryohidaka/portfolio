@@ -4695,7 +4695,11 @@ declare namespace GatsbyTypes {
 
   type Unnamed_1_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl">>
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
+          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
+        }
+      >
     }>
   }
 
@@ -4703,7 +4707,7 @@ declare namespace GatsbyTypes {
 
   type Unnamed_2_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl">>
     }>
   }
 
@@ -4712,8 +4716,8 @@ declare namespace GatsbyTypes {
   type Unnamed_3_Query = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
-          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
+        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
+          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
         }
       >
     }>
@@ -4724,8 +4728,8 @@ declare namespace GatsbyTypes {
   type Unnamed_4_Query = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
-          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
+        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
+          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
         }
       >
     }>
@@ -4830,14 +4834,6 @@ declare namespace GatsbyTypes {
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
 
-  type Unnamed_7_QueryVariables = Exact<{ [key: string]: never }>
-
-  type Unnamed_7_Query = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
-    }>
-  }
-
   type GatsbyContentfulFixedFragment = Pick<
     ContentfulFixed,
     "base64" | "width" | "height" | "src" | "srcSet"
@@ -4893,6 +4889,22 @@ declare namespace GatsbyTypes {
     ContentfulFluid,
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
+
+  type Unnamed_7_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_7_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+    }>
+  }
+
+  type Unnamed_8_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_8_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+    }>
+  }
 
   type BioQueryQueryVariables = Exact<{ [key: string]: never }>
 
