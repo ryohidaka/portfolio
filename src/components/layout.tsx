@@ -1,7 +1,8 @@
 import * as React from "react"
 import Header from "./header"
-import Footer from "../components/footer"
-import { CssBaseline, Container, Breadcrumbs, Link } from "@material-ui/core"
+import Footer from "./footer"
+import Breadcrumbs from "./breadcrumbs"
+import { CssBaseline, Container } from "@material-ui/core"
 
 type Props = {
   title: string
@@ -25,22 +26,7 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
     <>
       <Header title={title} links={pageLink} />
       <Container maxWidth="lg" component="main">
-        {crumbs.length > 1 && (
-          <Breadcrumbs aria-label="breadcrumb">
-            {crumbs.map((crumb: Crumb) => {
-              return (
-                <Link
-                  color="inherit"
-                  key={crumb.pathname}
-                  href={crumb.pathname}
-                  itemProp="url"
-                >
-                  {crumb.crumbLabel}
-                </Link>
-              )
-            })}
-          </Breadcrumbs>
-        )}
+        <Breadcrumbs crumbs={crumbs} />
         <CssBaseline />
         {children}
       </Container>

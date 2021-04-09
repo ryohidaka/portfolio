@@ -2,16 +2,17 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `日高凌 (ryohidaka)`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `日高凌`,
+      summary: `web developer`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `日高凌のポートフォリオサイトです。過去に作成したプロダクトや書籍の情報を掲載しています。`,
+    siteUrl: `https://ryohidaka.jp`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `ryhidaka`,
     },
+    icon: `/icon.png`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -55,8 +56,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `日高凌 (ryohidaka)`,
+        short_name: `日高凌`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -86,5 +87,6 @@ module.exports = {
         useAutoGen: true,
       },
     },
+    `gatsby-plugin-next-seo`,
   ],
 }

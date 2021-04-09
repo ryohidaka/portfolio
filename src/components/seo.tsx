@@ -6,8 +6,8 @@
  */
 
 import * as React from "react"
-import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { GatsbySeo, LogoJsonLd } from "gatsby-plugin-next-seo"
 
 type metaType = Array<{
   property?: string
@@ -18,10 +18,19 @@ type Props = {
   description?: string
   lang?: string
   meta?: metaType
-  title: string
+  title?: string
+  image?: Image
+  path?: string
 }
 
-const SEO: React.FC<Props> = ({ description, lang, meta, title }: Props) => {
+type Image = {
+  url: string
+  alt?: string
+  width?: number
+  height?: number
+}
+
+const SEO: React.FC<Props> = ({ description, title, image, path }: Props) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -29,61 +38,69 @@ const SEO: React.FC<Props> = ({ description, lang, meta, title }: Props) => {
           siteMetadata {
             title
             description
+            siteUrl
             social {
               twitter
             }
+            icon
           }
         }
       }
     `
   )
-
+  const siteTitle = site.siteMetadata.title
+  const siteUrl = site.siteMetadata.siteUrl
   const metaDescription = description || site.siteMetadata.description
-  const defaultMeta: metaType = [
-    {
-      name: `description`,
-      content: metaDescription,
-    },
-    {
-      property: `og:title`,
-      content: title,
-    },
-    {
-      property: `og:description`,
-      content: metaDescription,
-    },
-    {
-      property: `og:type`,
-      content: `website`,
-    },
-    {
-      name: `twitter:card`,
-      content: `summary`,
-    },
-    {
-      name: `twitter:creator`,
-      content: site.siteMetadata?.social?.twitter || ``,
-    },
-    {
-      name: `twitter:title`,
-      content: title,
-    },
-    {
-      name: `twitter:description`,
-      content: metaDescription,
-    },
-  ]
-  const propMeta: metaType = defaultMeta.concat(meta || [])
+  const twitterId = site.siteMetadata?.social?.twitter || ``
+  const icon = site.siteMetadata?.icon
+  path = path || ""
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={defaultMeta.concat(propMeta)}
-    />
+    <>
+      {/* サブページ以降はタイトルテンプレートを使用 */}
+      {title && <GatsbySeo titleTemplate={`%s | ${siteTitle}`} />}
+
+      {image && (
+        <GatsbySeo
+          openGraph={{
+            images: [
+              {
+                url: image.url || "",
+                width: image.width || 800,
+                height: image.height || 600,
+                alt: image.alt || "",
+              },
+            ],
+          }}
+        />
+      )}
+
+      <GatsbySeo
+        title={title || siteTitle}
+        description={metaDescription}
+        openGraph={{
+          locale: "ja",
+          url: `${siteUrl}${path}`,
+          title,
+          description: metaDescription,
+
+          site_name: siteTitle,
+          profile: {
+            firstName: "Ryo",
+            lastName: "Hidaka",
+            username: "日高凌",
+            gender: "male",
+          },
+        }}
+        twitter={{
+          handle: twitterId,
+          site: twitterId,
+          cardType: "summary_large_image",
+        }}
+      />
+
+      <LogoJsonLd logo={`${siteUrl}${icon}`} url={siteUrl} />
+    </>
   )
 }
 

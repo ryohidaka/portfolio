@@ -10,9 +10,10 @@ import WorkCard from "../components/work-card"
 type Props = {
   pageContext: {
     posts: Post[]
-    breadcrumb: any
+    breadcrumb: { crumbs: Crumb[] }
   }
   data: any
+  location: any
 }
 
 type Post = {
@@ -24,12 +25,21 @@ type Post = {
   }
 }
 
-const WorkIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
+type Crumb = {
+  pathname: string
+  crumbLabel: string
+}
+
+const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
+  const {
+    breadcrumb: { crumbs },
+  } = pageContext
+
   return (
-    <Layout title={siteTitle} crumbs={pageContext.breadcrumb}>
-      <SEO title="WORKS" />
+    <Layout title={siteTitle} crumbs={crumbs}>
+      <SEO title="WORKS" path={location.pathname} />
       <Bio />
       <Grid item xs={12}>
         <Grid container justify="space-between" spacing={4}>
