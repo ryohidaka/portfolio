@@ -10,6 +10,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             node {
               title
               slug
+              createdAt
+              published_at
+              updatedAt
               body {
                 raw
                 references {
@@ -31,6 +34,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               title
               slug
               description
+              createdAt
+              publishedAt
+              updatedAt
               eyecatch {
                 file {
                   url

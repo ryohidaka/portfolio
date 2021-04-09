@@ -2,6 +2,7 @@ import React from "react"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import BlogPostJsonld from "../components/jsonld/blog-post"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
 
@@ -12,12 +13,16 @@ type Props = {
     data: any
     breadcrumb: { crumbs: Crumb[] }
   }
-  location: any
 }
 
 type Post = {
   title: string
+  slug: string
   body: any
+  createdAt: string
+  published_at?: string
+  updatedAt: string
+  description?: string
 }
 
 type Crumb = {
@@ -36,10 +41,7 @@ const options: any = {
   },
 }
 
-const CommonPostTemplate: React.FC<Props> = ({
-  pageContext,
-  location,
-}: Props) => {
+const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
   const { post } = pageContext
   const title = post.title
 
@@ -52,12 +54,15 @@ const CommonPostTemplate: React.FC<Props> = ({
 
   return (
     <Layout title={title} crumbs={crumbs}>
-      <SEO title={title} path={location.pathname} />
+      <SEO title={title} />
       <Bio />
       <article>
         <h1>{title}</h1>
         {renderRichText(post.body, options)}
       </article>
+
+      {/* 構造化マークアップ */}
+      <BlogPostJsonld post={post} />
     </Layout>
   )
 }

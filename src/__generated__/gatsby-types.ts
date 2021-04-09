@@ -298,6 +298,9 @@ declare namespace GatsbyTypes {
   type SitePageContextPostsNode = {
     readonly title: Maybe<Scalars["String"]>
     readonly slug: Maybe<Scalars["String"]>
+    readonly createdAt: Maybe<Scalars["Date"]>
+    readonly published_at: Maybe<Scalars["Date"]>
+    readonly updatedAt: Maybe<Scalars["Date"]>
     readonly body: Maybe<SitePageContextPostsNodeBody>
     readonly description: Maybe<Scalars["String"]>
     readonly eyecatch: Maybe<SitePageContextPostsNodeEyecatch>
@@ -343,6 +346,9 @@ declare namespace GatsbyTypes {
   type SitePageContextPost = {
     readonly title: Maybe<Scalars["String"]>
     readonly slug: Maybe<Scalars["String"]>
+    readonly createdAt: Maybe<Scalars["Date"]>
+    readonly published_at: Maybe<Scalars["Date"]>
+    readonly updatedAt: Maybe<Scalars["Date"]>
     readonly body: Maybe<SitePageContextPostBody>
     readonly description: Maybe<Scalars["String"]>
     readonly eyecatch: Maybe<SitePageContextPostEyecatch>
@@ -904,6 +910,7 @@ declare namespace GatsbyTypes {
       readonly title: Maybe<Scalars["String"]>
       readonly body: Maybe<ContentfulBlogPostBody>
       readonly slug: Maybe<Scalars["String"]>
+      readonly published_at: Maybe<Scalars["Date"]>
       readonly spaceId: Maybe<Scalars["String"]>
       readonly createdAt: Maybe<Scalars["Date"]>
       readonly updatedAt: Maybe<Scalars["Date"]>
@@ -912,6 +919,13 @@ declare namespace GatsbyTypes {
       readonly children: ReadonlyArray<Node>
       readonly internal: Internal
     }
+
+  type ContentfulBlogPost_published_atArgs = {
+    formatString: Maybe<Scalars["String"]>
+    fromNow: Maybe<Scalars["Boolean"]>
+    difference: Maybe<Scalars["String"]>
+    locale: Maybe<Scalars["String"]>
+  }
 
   type ContentfulBlogPost_createdAtArgs = {
     formatString: Maybe<Scalars["String"]>
@@ -1392,6 +1406,7 @@ declare namespace GatsbyTypes {
     title: Maybe<StringQueryOperatorInput>
     body: Maybe<ContentfulBlogPostBodyFilterInput>
     slug: Maybe<StringQueryOperatorInput>
+    published_at: Maybe<DateQueryOperatorInput>
     spaceId: Maybe<StringQueryOperatorInput>
     createdAt: Maybe<DateQueryOperatorInput>
     updatedAt: Maybe<DateQueryOperatorInput>
@@ -2343,6 +2358,9 @@ declare namespace GatsbyTypes {
   type SitePageContextPostsNodeFilterInput = {
     readonly title: Maybe<StringQueryOperatorInput>
     readonly slug: Maybe<StringQueryOperatorInput>
+    readonly createdAt: Maybe<DateQueryOperatorInput>
+    readonly published_at: Maybe<DateQueryOperatorInput>
+    readonly updatedAt: Maybe<DateQueryOperatorInput>
     readonly body: Maybe<SitePageContextPostsNodeBodyFilterInput>
     readonly description: Maybe<StringQueryOperatorInput>
     readonly eyecatch: Maybe<SitePageContextPostsNodeEyecatchFilterInput>
@@ -2392,6 +2410,9 @@ declare namespace GatsbyTypes {
   type SitePageContextPostFilterInput = {
     readonly title: Maybe<StringQueryOperatorInput>
     readonly slug: Maybe<StringQueryOperatorInput>
+    readonly createdAt: Maybe<DateQueryOperatorInput>
+    readonly published_at: Maybe<DateQueryOperatorInput>
+    readonly updatedAt: Maybe<DateQueryOperatorInput>
     readonly body: Maybe<SitePageContextPostBodyFilterInput>
     readonly description: Maybe<StringQueryOperatorInput>
     readonly eyecatch: Maybe<SitePageContextPostEyecatchFilterInput>
@@ -2680,6 +2701,9 @@ declare namespace GatsbyTypes {
     | "context.posts"
     | "context.posts.node.title"
     | "context.posts.node.slug"
+    | "context.posts.node.createdAt"
+    | "context.posts.node.published_at"
+    | "context.posts.node.updatedAt"
     | "context.posts.node.description"
     | "context.breadcrumb.location"
     | "context.breadcrumb.crumbs"
@@ -2687,6 +2711,9 @@ declare namespace GatsbyTypes {
     | "context.breadcrumb.crumbs.crumbLabel"
     | "context.post.title"
     | "context.post.slug"
+    | "context.post.createdAt"
+    | "context.post.published_at"
+    | "context.post.updatedAt"
     | "context.post.body.raw"
     | "context.post.body.references"
     | "context.post.description"
@@ -4039,6 +4066,7 @@ declare namespace GatsbyTypes {
     | "body.references.internal.owner"
     | "body.references.internal.type"
     | "slug"
+    | "published_at"
     | "spaceId"
     | "createdAt"
     | "updatedAt"
@@ -4149,6 +4177,7 @@ declare namespace GatsbyTypes {
     readonly title: Maybe<StringQueryOperatorInput>
     readonly body: Maybe<ContentfulBlogPostBodyFilterInput>
     readonly slug: Maybe<StringQueryOperatorInput>
+    readonly published_at: Maybe<DateQueryOperatorInput>
     readonly spaceId: Maybe<StringQueryOperatorInput>
     readonly createdAt: Maybe<DateQueryOperatorInput>
     readonly updatedAt: Maybe<DateQueryOperatorInput>
@@ -4682,7 +4711,11 @@ declare namespace GatsbyTypes {
 
   type Unnamed_3_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
+          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
+        }
+      >
     }>
   }
 
@@ -4691,8 +4724,8 @@ declare namespace GatsbyTypes {
   type Unnamed_4_Query = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
-          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
+        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
+          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
         }
       >
     }>
@@ -4796,6 +4829,14 @@ declare namespace GatsbyTypes {
     ImageSharpFluid,
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
+
+  type Unnamed_7_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_7_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+    }>
+  }
 
   type GatsbyContentfulFixedFragment = Pick<
     ContentfulFixed,
