@@ -52,7 +52,7 @@ const CommonPostTemplate: React.FC<Props> = ({ pageContext }: Props) => {
   crumbs[2].crumbLabel = title
 
   return (
-    <Layout title={title} crumbs={crumbs}>
+    <Layout title="BLOG" crumbs={crumbs}>
       <SEO title={title} />
       <article>
         <h1>{title}</h1>

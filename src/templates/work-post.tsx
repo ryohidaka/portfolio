@@ -61,7 +61,7 @@ const CommonPostTemplate: React.FC<Props> = ({
   crumbs[2].crumbLabel = title
 
   return (
-    <Layout title={title} crumbs={crumbs}>
+    <Layout title="WORKS" crumbs={crumbs}>
       <SEO
         title={title}
         description={description}
@@ -72,7 +72,7 @@ const CommonPostTemplate: React.FC<Props> = ({
         <h1>{title}</h1>
         {renderRichText(post.body, options)}
       </article>
-      
+
       {/* 構造化マークアップ */}
       <WorksJsonld post={post} />
     </Layout>
