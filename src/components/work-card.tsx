@@ -13,8 +13,11 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
+  action: {
+    height: "100%",
+  },
   thumbnail: {
-    objectFit: "contain",
+    objectFit: "scale-down",
   },
 })
 
@@ -33,7 +36,11 @@ export const WorkCard: React.FC<Props> = ({ work }: Props) => {
 
   return (
     <Card className={classes.root} id={work.slug}>
-      <CardActionArea component={Link} to={work.slug}>
+      <CardActionArea
+        component={Link}
+        to={work.slug}
+        className={classes.action}
+      >
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
