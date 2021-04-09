@@ -68,11 +68,8 @@ const CommonPostTemplate: React.FC<Props> = ({
         image={eyecatch}
         path={location.pathname}
       />
-      <article>
-        <h1>{title}</h1>
-        {renderRichText(post.body, options)}
-      </article>
-      
+      <article>{renderRichText(post.body, options)}</article>
+
       {/* 構造化マークアップ */}
       <WorksJsonld post={post} />
     </Layout>
