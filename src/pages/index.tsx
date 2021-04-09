@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import SectionTitle from "../components/section-title"
 
 type Props = {
   pageContext: any
@@ -21,6 +22,9 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
     <Layout title={siteTitle} crumbs={crumbs}>
       <SEO />
       <Bio />
+      <section>
+        <SectionTitle title="works" />
+      </section>
 
       <Link to={"blog"} itemProp="url">
         <span itemProp="headline">BLOG</span>
