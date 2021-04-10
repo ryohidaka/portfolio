@@ -9,7 +9,7 @@ type Props = {
 
 const useStyles = makeStyles({
   root: {
-    margin: "8rem auto",
+    margin: "5vmin auto",
     textTransform: "uppercase",
   },
 })
