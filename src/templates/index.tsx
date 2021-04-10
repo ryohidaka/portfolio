@@ -1,12 +1,12 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SectionTitle from "../components/section-title"
-import WorkCard from "../components/work-card"
-import Grid from "@material-ui/core/Grid"
+
+import TopWorksList from "../components/top-works-list"
 
 type Props = {
   pageContext: {
@@ -42,13 +42,7 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
       <Bio />
       <section>
         <SectionTitle title="works" />
-        <Grid item xs={12}>
-          <Grid container justify="space-between" spacing={4}>
-            {pageContext.works.map((post: Work) => {
-              return <WorkCard work={post.node} />
-            })}
-          </Grid>
-        </Grid>
+        <TopWorksList works={pageContext.works} />
       </section>
 
       <Link to={"blog"} itemProp="url">
