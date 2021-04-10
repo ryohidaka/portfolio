@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import Footer from "./footer"
 import Breadcrumbs from "./breadcrumbs"
@@ -6,7 +7,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { CssBaseline, Container } from "@material-ui/core"
 
 type Props = {
-  title: string
+  title?: string
   children: any
   crumbs: Crumb[]
 }
@@ -32,9 +33,21 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
     { name: "blog", url: "/blog" },
   ]
 
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `
+  )
+
   return (
     <>
-      <Header title={title} links={pageLink} />
+      <Header title={title || site.siteMetadata.title} links={pageLink} />
       <Container maxWidth="lg" component="main" className={classes.container}>
         <Breadcrumbs crumbs={crumbs} title={title} />
         <CssBaseline />
