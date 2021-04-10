@@ -74,6 +74,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     path: `/`,
     component: path.resolve(`./src/templates/index.tsx`),
     context: {
+      blogs: result.data.allContentfulBlogPost.edges,
       works: result.data.allContentfulWorks.edges,
     },
   })
