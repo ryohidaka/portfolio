@@ -7,7 +7,7 @@ const useStyles = makeStyles(() =>
     root: {
       flexGrow: 1,
       color: "#000",
-      backgroundColor: "inherit",
+      backgroundColor: "#fafafa",
       textAlign: "center",
       top: "auto",
       bottom: 0,

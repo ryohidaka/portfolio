@@ -2,7 +2,6 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import Grid from "@material-ui/core/Grid"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import WorkCard from "../components/work-card"
@@ -38,9 +37,8 @@ const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   } = pageContext
 
   return (
-    <Layout title={siteTitle} crumbs={crumbs}>
+    <Layout title="WORKS" crumbs={crumbs}>
       <SEO title="WORKS" path={location.pathname} />
-      <Bio />
       <Grid item xs={12}>
         <Grid container justify="space-between" spacing={4}>
           {pageContext.posts.map((post: Post) => {

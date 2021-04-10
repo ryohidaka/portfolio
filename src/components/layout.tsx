@@ -2,6 +2,7 @@ import * as React from "react"
 import Header from "./header"
 import Footer from "./footer"
 import Breadcrumbs from "./breadcrumbs"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { CssBaseline, Container } from "@material-ui/core"
 
 type Props = {
@@ -15,7 +16,16 @@ type Crumb = {
   crumbLabel: string
 }
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    container: {
+      paddingBottom: "5rem",
+    },
+  })
+)
+
 const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
+  const classes = useStyles()
   const pageLink = [
     { name: "home", url: "/" },
     { name: "works", url: "/works" },
@@ -25,8 +35,8 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
   return (
     <>
       <Header title={title} links={pageLink} />
-      <Container maxWidth="lg" component="main">
-        <Breadcrumbs crumbs={crumbs} />
+      <Container maxWidth="lg" component="main" className={classes.container}>
+        <Breadcrumbs crumbs={crumbs} title={title} />
         <CssBaseline />
         {children}
       </Container>

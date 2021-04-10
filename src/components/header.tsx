@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Hidden,
 } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
@@ -128,20 +129,22 @@ const Header: React.FC<Props> = ({ links }: Props) => {
           <MenuIcon />
         </IconButton>
 
-        <div className={classes.menus}>
-          {links.map(link => {
-            return (
-              <Button
-                color="inherit"
-                key={link.url}
-                component={Link}
-                to={link.url}
-              >
-                {link.name}
-              </Button>
-            )
-          })}
-        </div>
+        <Hidden mdDown>
+          <div className={classes.menus}>
+            {links.map(link => {
+              return (
+                <Button
+                  color="inherit"
+                  key={link.url}
+                  component={Link}
+                  to={link.url}
+                >
+                  {link.name}
+                </Button>
+              )
+            })}
+          </div>
+        </Hidden>
       </Toolbar>
 
       <Drawer

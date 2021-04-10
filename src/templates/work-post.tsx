@@ -1,5 +1,4 @@
 import React from "react"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import WorksJsonld from "../components/jsonld/works"
@@ -62,19 +61,18 @@ const CommonPostTemplate: React.FC<Props> = ({
   crumbs[2].crumbLabel = title
 
   return (
-    <Layout title={title} crumbs={crumbs}>
+    <Layout title="WORKS" crumbs={crumbs}>
       <SEO
         title={title}
         description={description}
         image={eyecatch}
         path={location.pathname}
       />
-      <Bio />
       <article>
         <h1>{title}</h1>
         {renderRichText(post.body, options)}
       </article>
-      
+
       {/* 構造化マークアップ */}
       <WorksJsonld post={post} />
     </Layout>
