@@ -11,7 +11,6 @@ type Props = {
     posts: Post[]
     breadcrumb: { crumbs: Crumb[] }
   }
-  data: any
   location: any
 }
 
@@ -29,9 +28,7 @@ type Crumb = {
   crumbLabel: string
 }
 
-const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-
+const WorkIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
   const {
     breadcrumb: { crumbs },
   } = pageContext
@@ -51,13 +48,3 @@ const WorkIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
 }
 
 export default WorkIndex
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`
