@@ -1,8 +1,10 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
+import { Typography, Grid } from "@material-ui/core"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import BlogCard from "../components/blog-card"
 
 type Props = {
   pageContext: {
@@ -17,6 +19,11 @@ type Post = {
   node: {
     title: string
     slug: string
+    body: any
+    createdAt: string
+    published_at?: string
+    updatedAt: string
+    description?: string
   }
 }
 
@@ -33,30 +40,22 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
   return (
     <Layout title="BLOG" crumbs={crumbs}>
       <SEO title="BLOG" path={location.pathname} />
-      <ol style={{ listStyle: `none` }}>
-        {pageContext.posts.map((post: Post) => {
-          const title = post.node.title
 
-          return (
-            <li key={post.node.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.node.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                </header>
-                <section></section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
+      {pageContext.posts.length > 0 && (
+        <Grid item xs={12}>
+          <Grid container justify="space-between" spacing={4}>
+            {pageContext.posts.map((post: Post) => {
+              return <BlogCard post={post.node} />
+            })}
+          </Grid>
+        </Grid>
+      )}
+
+      {pageContext.posts.length === 0 && (
+        <Typography variant="body1" component="p" align="center">
+          現在投稿はございません。
+        </Typography>
+      )}
     </Layout>
   )
 }
