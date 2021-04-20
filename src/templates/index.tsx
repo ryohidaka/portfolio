@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -15,7 +14,6 @@ type Props = {
     works: Work[]
     breadcrumb: { crumbs: Crumb[] }
   }
-  data: any
 }
 
 type Blog = {
@@ -45,14 +43,13 @@ type Crumb = {
   crumbLabel: string
 }
 
-const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+const BlogIndex: React.FC<Props> = ({ pageContext }: Props) => {
   const {
     breadcrumb: { crumbs },
   } = pageContext
 
   return (
-    <Layout title={siteTitle} crumbs={crumbs}>
+    <Layout crumbs={crumbs}>
       <SEO />
       <Bio />
       <section>
@@ -69,13 +66,3 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data }: Props) => {
 }
 
 export default BlogIndex
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

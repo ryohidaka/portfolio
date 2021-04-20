@@ -1,17 +1,7 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { StaticImage } from "gatsby-plugin-image"
-import Icon from "@material-ui/core/Icon"
-import { Grid, Hidden, Typography } from "@material-ui/core"
-import Avatar from "@material-ui/core/Avatar"
+import { Grid, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import TwitterIcon from "@material-ui/icons/Twitter"
 import FacebookIcon from "@material-ui/icons/Facebook"
@@ -26,9 +16,9 @@ const useStyles = makeStyles(() =>
     icon: {
       marginRight: "0.5rem",
     },
-    btn:{
-      margin:"0.1rem"
-    }
+    btn: {
+      margin: "0.1rem",
+    },
   })
 )
 
@@ -61,7 +51,7 @@ const Bio = () => {
         </Typography>
 
         <Grid container justify="space-between">
-          <Button variant="outlined" color="primary"　className={classes.btn}>
+          <Button variant="outlined" color="primary" className={classes.btn}>
             <TwitterIcon className={classes.icon} />
             Twitter
           </Button>

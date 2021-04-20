@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 import { Typography, Grid } from "@material-ui/core"
 
 import Layout from "../components/layout"
@@ -11,7 +10,6 @@ type Props = {
     posts: Post[]
     breadcrumb: { crumbs: Crumb[] }
   }
-  data: any
   location: any
 }
 
@@ -32,8 +30,7 @@ type Crumb = {
   crumbLabel: string
 }
 
-const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+const BlogIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
   const {
     breadcrumb: { crumbs },
   } = pageContext
@@ -61,13 +58,3 @@ const BlogIndex: React.FC<Props> = ({ pageContext, data, location }: Props) => {
 }
 
 export default BlogIndex
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

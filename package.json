@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
+    "@formspree/react": "^2.2.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "dotenv": "^8.2.0",
     "gatsby": "^3.2.1",
