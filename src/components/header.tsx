@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Drawer,

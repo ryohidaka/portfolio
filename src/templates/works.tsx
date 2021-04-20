@@ -33,9 +33,12 @@ const WorkIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
     breadcrumb: { crumbs },
   } = pageContext
 
+  const description =
+    "過去に作成したプロダクトや書籍の情報を掲載しています。記載された情報は、発表日現在のものです。"
+
   return (
     <Layout title="WORKS" crumbs={crumbs}>
-      <SEO title="WORKS" path={location.pathname} />
+      <SEO title="WORKS" description={description} path={location.pathname} />
       <Grid item xs={12}>
         <Grid container justify="space-between" spacing={4}>
           {pageContext.posts.map((post: Post) => {
