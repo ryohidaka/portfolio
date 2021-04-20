@@ -13,9 +13,12 @@ const ContactPage: React.FC<Props> = ({ pageContext, location }: Props) => {
     breadcrumb: { crumbs },
   } = pageContext
 
+  const description =
+    "こちらはお問い合わせページです。お問い合わせフォームに必要事項を入力し、送信ボタンを押してください。後日改めて担当者より連絡いたします。"
+
   return (
     <Layout title="CONTACT" crumbs={crumbs}>
-      <SEO title="CONTACT" path={location.pathname} />
+      <SEO title="CONTACT" description={description} path={location.pathname} />
       <ContactForm />
     </Layout>
   )

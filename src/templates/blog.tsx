@@ -34,9 +34,12 @@ const BlogIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
   const {
     breadcrumb: { crumbs },
   } = pageContext
+
+  const description = "ブログ記事の一覧ページです。不定期で更新しています。"
+
   return (
     <Layout title="BLOG" crumbs={crumbs}>
-      <SEO title="BLOG" path={location.pathname} />
+      <SEO title="BLOG" description={description} path={location.pathname} />
 
       {pageContext.posts.length > 0 && (
         <Grid item xs={12}>
