@@ -31,6 +31,7 @@ const Layout: React.FC<Props> = ({ title, children, crumbs }: Props) => {
     { name: "home", url: "/" },
     { name: "works", url: "/works" },
     { name: "blog", url: "/blog" },
+    { name: "contact", url: "/contact" },
   ]
 
   const { site } = useStaticQuery(
