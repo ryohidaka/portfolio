@@ -4712,51 +4712,7 @@ declare namespace GatsbyTypes {
 
   type Unnamed_1_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl">>
-    }>
-  }
-
-  type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>
-
-  type Unnamed_2_Query = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
-          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
-        }
-      >
-    }>
-  }
-
-  type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>
-
-  type Unnamed_3_Query = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
-          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
-        }
-      >
-    }>
-  }
-
-  type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>
-
-  type Unnamed_4_Query = {
-    readonly site: Maybe<{
       readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
-    }>
-  }
-
-  type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>
-
-  type Unnamed_5_Query = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
-          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
-        }
-      >
     }>
   }
 
@@ -4843,13 +4799,15 @@ declare namespace GatsbyTypes {
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
 
-  type usersryohidakaportfoliosrcpagescontactTsx3159585216QueryVariables = Exact<{
-    [key: string]: never
-  }>
+  type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>
 
-  type usersryohidakaportfoliosrcpagescontactTsx3159585216Query = {
+  type Unnamed_2_Query = {
     readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">>
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
+          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
+        }
+      >
     }>
   }
 
@@ -4909,11 +4867,43 @@ declare namespace GatsbyTypes {
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >
 
+  type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_3_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "siteUrl" | "icon"> & {
+          readonly author: Maybe<Pick<SiteSiteMetadataAuthor, "name">>
+        }
+      >
+    }>
+  }
+
   type PagesQueryQueryVariables = Exact<{ [key: string]: never }>
 
   type PagesQueryQuery = {
     readonly allSitePage: {
       readonly nodes: ReadonlyArray<Pick<SitePage, "path">>
     }
+  }
+
+  type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_4_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl">>
+    }>
+  }
+
+  type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>
+
+  type Unnamed_5_Query = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<
+        Pick<SiteSiteMetadata, "title" | "description" | "siteUrl" | "icon"> & {
+          readonly social: Maybe<Pick<SiteSiteMetadataSocial, "twitter">>
+        }
+      >
+    }>
   }
 }
