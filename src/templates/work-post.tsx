@@ -1,10 +1,13 @@
 import React from "react"
+import moment from "moment"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Img from "../components/image"
 import WorksJsonld from "../components/jsonld/works"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
+import { Typography, Grid, Button } from "@material-ui/core"
+import UpdateOutlinedIcon from "@material-ui/icons/UpdateOutlined"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 type Props = {
@@ -46,6 +49,11 @@ const options: any = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    updatedAt: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+    },
     logo: {
       height: "3rem",
       margin: "0 1rem",
@@ -80,6 +88,13 @@ const CommonPostTemplate: React.FC<Props> = ({
         image={eyecatch}
         path={location.pathname}
       />
+
+      {/* 最終更新日 */}
+      <Typography variant="body1" className={classes.updatedAt}>
+        <UpdateOutlinedIcon />
+        <time>{moment(post.updatedAt).format(`YYYY/MM/DD`)}</time>
+      </Typography>
+
       <article>
         <h1>{title}</h1>
         <Img src={eyecatch.url} alt={eyecatch.alt} />
