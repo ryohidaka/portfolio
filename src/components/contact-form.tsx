@@ -156,6 +156,8 @@ function ContactForm() {
             >
               戻る
             </Button>
+
+            {/* 入力画面 */}
             {activeStep === 0 && (
               <Button
                 variant="contained"
@@ -166,6 +168,8 @@ function ContactForm() {
                 次へ
               </Button>
             )}
+
+            {/* 確認画面 */}
             {activeStep === 1 && (
               <Button
                 variant="contained"

@@ -41,7 +41,7 @@ const BlogIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
     <Layout title="BLOG" crumbs={crumbs}>
       <SEO title="BLOG" description={description} path={location.pathname} />
 
-      {pageContext.posts.length > 0 && (
+      {pageContext.posts.length > 0 ? (
         <Grid item xs={12}>
           <Grid container justify="space-between" spacing={4}>
             {pageContext.posts.map((post: Post) => {
@@ -49,9 +49,7 @@ const BlogIndex: React.FC<Props> = ({ pageContext, location }: Props) => {
             })}
           </Grid>
         </Grid>
-      )}
-
-      {pageContext.posts.length === 0 && (
+      ) : (
         <Typography variant="body1" component="p" align="center">
           現在投稿はございません。
         </Typography>

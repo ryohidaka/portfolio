@@ -52,7 +52,7 @@ export const BlogCard: React.FC<Props> = ({ post }: Props) => {
         to={`/blog/${post.slug}`}
         className={classes.action}
       >
-        {post.eyecatch && (
+        {post.eyecatch ? (
           <CardMedia
             component="img"
             alt="Contemplative Reptile"
@@ -61,8 +61,7 @@ export const BlogCard: React.FC<Props> = ({ post }: Props) => {
             title="Contemplative Reptile"
             className={classes.thumbnail}
           />
-        )}
-        {!post.eyecatch && (
+        ) : (
           <Skeleton animation="wave" variant="rect" className={classes.media} />
         )}
 
