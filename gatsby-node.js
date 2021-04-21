@@ -1,24 +1,67 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-
-  // Get all markdown blog posts sorted by date
   const result = await graphql(
     `
-      {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
+      query {
+        allContentfulBlogPost(filter: { slug: { ne: "dummy" } }) {
+          edges {
+            node {
+              title
               slug
+              createdAt
+              published_at
+              updatedAt
+              body {
+                raw
+                references {
+                  ... on ContentfulAsset {
+                    contentful_id
+                    __typename
+                    file {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        allContentfulWorks(filter: { slug: { ne: "dummy" } }) {
+          edges {
+            node {
+              title
+              slug
+              description
+              createdAt
+              publishedAt
+              updatedAt
+              url
+              isBook
+              eyecatch {
+                file {
+                  url
+                }
+              }
+              logo {
+                file {
+                  url
+                }
+              }
+              body {
+                raw
+                references {
+                  ... on ContentfulAsset {
+                    contentful_id
+                    __typename
+                    file {
+                      url
+                    }
+                    title
+                  }
+                }
+              }
             }
           }
         }
@@ -33,55 +76,66 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     )
     return
   }
+  // トップページ
+  createPage({
+    path: `/`,
+    component: path.resolve(`./src/templates/index.tsx`),
+    context: {
+      blogs: result.data.allContentfulBlogPost.edges,
+      works: result.data.allContentfulWorks.edges,
+    },
+  })
 
-  const posts = result.data.allMarkdownRemark.nodes
+  // Blog一覧ページ
+  createPage({
+    path: `/blog`,
+    component: path.resolve(`./src/templates/blog.tsx`),
+    context: {
+      posts: result.data.allContentfulBlogPost.edges,
+    },
+  })
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
+  // Blog詳細ページ
+  result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
+    createPage({
+      path: `/blog/${node.slug}`,
+      component: path.resolve(`./src/templates/blog-post.tsx`),
+      context: {
+        post: node,
+      },
     })
-  }
-}
+  })
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+  // Works一覧ページ
+  createPage({
+    path: `/works`,
+    component: path.resolve(`./src/templates/works.tsx`),
+    context: {
+      posts: result.data.allContentfulWorks.edges,
+    },
+  })
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
+  // Works詳細ページ
+  result.data.allContentfulWorks.edges.forEach(({ node }) => {
+    createPage({
+      path: `/works/${node.slug}`,
+      component: path.resolve(`./src/templates/work-post.tsx`),
+      context: {
+        post: node,
+      },
     })
-  }
-}
+  })
 
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
+  exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
 
-  // Explicitly define the siteMetadata {} object
-  // This way those will always be defined even if removed from gatsby-config.js
+    // Explicitly define the siteMetadata {} object
+    // This way those will always be defined even if removed from gatsby-config.js
 
-  // Also explicitly define the Markdown frontmatter
-  // This way the "MarkdownRemark" queries will return `null` even when no
-  // blog posts are stored inside "content/blog" instead of returning an error
-  createTypes(`
+    // Also explicitly define the Markdown frontmatter
+    // This way the "MarkdownRemark" queries will return `null` even when no
+    // blog posts are stored inside "content/blog" instead of returning an error
+    createTypes(`
     type SiteSiteMetadata {
       author: Author
       siteUrl: String
@@ -112,4 +166,5 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
   `)
+  }
 }
