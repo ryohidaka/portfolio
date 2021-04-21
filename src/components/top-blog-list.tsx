@@ -28,7 +28,7 @@ const TopBlogList: React.FC<Props> = ({ blogs }: Props) => {
 
   return (
     <Grid item xs={12}>
-      {blogs.length > 0 && (
+      {blogs.length > 0 ? (
         <>
           <Hidden mdDown>
             <Grid container justify="space-between" spacing={4}>
@@ -50,8 +50,7 @@ const TopBlogList: React.FC<Props> = ({ blogs }: Props) => {
             </Grid>
           </Hidden>
         </>
-      )}
-      {blogs.length === 0 && (
+      ) : (
         <Typography variant="body1" component="p" align="center">
           現在投稿はございません。
         </Typography>
