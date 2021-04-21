@@ -37,7 +37,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               createdAt
               publishedAt
               updatedAt
+              url
+              isBook
               eyecatch {
+                file {
+                  url
+                }
+              }
+              logo {
                 file {
                   url
                 }
