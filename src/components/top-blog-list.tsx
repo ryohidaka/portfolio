@@ -33,7 +33,7 @@ const TopBlogList: React.FC<Props> = ({ blogs }: Props) => {
           <Hidden mdDown>
             <Grid container justify="space-between" spacing={4}>
               {blogs.map((post: Blog) => {
-                return <BlogCard post={post.node} />
+                return <BlogCard post={post.node} key={post.node.slug} />
               })}
             </Grid>
           </Hidden>

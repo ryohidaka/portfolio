@@ -27,7 +27,7 @@ const TopWorksList: React.FC<Props> = ({ works }: Props) => {
       <Hidden mdDown>
         <Grid container justify="space-between" spacing={4}>
           {works.map((post: Work) => {
-            return <WorkCard work={post.node} />
+            return <WorkCard work={post.node} key={post.node.slug} />
           })}
         </Grid>
       </Hidden>
