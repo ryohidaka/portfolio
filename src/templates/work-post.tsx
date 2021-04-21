@@ -49,6 +49,7 @@ const options: any = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    description: { marginTop: theme.spacing(5) },
     updatedAt: {
       display: "flex",
       alignItems: "center",
@@ -115,6 +116,15 @@ const CommonPostTemplate: React.FC<Props> = ({
             </Typography>
           </Grid>
 
+          {/* 記事説明 */}
+          <Typography
+            variant="h6"
+            component="p"
+            align="center"
+            className={classes.description}
+          >
+            {description}
+          </Typography>
         </header>
 
         <main>
