@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import moment from "moment"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -29,6 +30,8 @@ type Post = {
   createdAt: string
   published_at?: string
   updatedAt: string
+  url?: string
+  isBook?: boolean
 }
 
 type Crumb = {
@@ -54,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-end",
+    },
+    linkBtnBox: {
+      marginTop: theme.spacing(5),
     },
     logo: {
       height: "3rem",
@@ -131,6 +137,25 @@ const CommonPostTemplate: React.FC<Props> = ({
           {/* アイキャッチ画像 */}
           <Img src={eyecatch.url} alt={eyecatch.alt} />
 
+          {/* リンクボタン */}
+          {post.url && (
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              className={classes.linkBtnBox}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to={post.url}
+              >
+                {post.isBook ? "販売ページはこちら" : "公式ページはこちら"}
+              </Button>
+            </Grid>
+          )}
 
           {/* 本文 */}
           {renderRichText(post.body, options)}
