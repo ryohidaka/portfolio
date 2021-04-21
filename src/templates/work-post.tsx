@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
 const CommonPostTemplate: React.FC<Props> = ({
   pageContext,
   location,
@@ -96,8 +97,7 @@ const CommonPostTemplate: React.FC<Props> = ({
       </Typography>
 
       <article>
-        <h1>{title}</h1>
-        <Img src={eyecatch.url} alt={eyecatch.alt} />
+        <header>
           <Grid container direction="row" justify="center" alignItems="center">
             {/* ロゴ画像がある場合は表示 */}
             {post.logo && (
@@ -115,8 +115,16 @@ const CommonPostTemplate: React.FC<Props> = ({
             </Typography>
           </Grid>
 
+        </header>
 
-        {renderRichText(post.body, options)}
+        <main>
+          {/* アイキャッチ画像 */}
+          <Img src={eyecatch.url} alt={eyecatch.alt} />
+
+
+          {/* 本文 */}
+          {renderRichText(post.body, options)}
+        </main>
       </article>
 
       {/* 構造化マークアップ */}
