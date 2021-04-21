@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Img from "../components/image"
 import WorksJsonld from "../components/jsonld/works"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
@@ -70,6 +71,8 @@ const CommonPostTemplate: React.FC<Props> = ({
       />
       <article>
         <h1>{title}</h1>
+        <Img src={eyecatch.url} alt={eyecatch.alt} />
+
         {renderRichText(post.body, options)}
       </article>
 
