@@ -42,6 +42,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                   url
                 }
               }
+              logo {
+                file {
+                  url
+                }
+              }
               body {
                 raw
                 references {

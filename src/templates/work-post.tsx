@@ -5,6 +5,7 @@ import Img from "../components/image"
 import WorksJsonld from "../components/jsonld/works"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 type Props = {
   pageContext: {
@@ -21,6 +22,7 @@ type Post = {
   description: string
   body: any
   eyecatch: { file: { url: string }; title: string }
+  logo: { file: { url: string } }
   createdAt: string
   published_at?: string
   updatedAt: string
@@ -42,6 +44,14 @@ const options: any = {
   },
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    logo: {
+      height: "3rem",
+      margin: "0 1rem",
+    },
+  })
+)
 const CommonPostTemplate: React.FC<Props> = ({
   pageContext,
   location,
@@ -61,6 +71,7 @@ const CommonPostTemplate: React.FC<Props> = ({
   // 記事ページはパンくずリストのタイトルを記事タイトルに
   crumbs[2].crumbLabel = title
 
+  const classes = useStyles()
   return (
     <Layout title="WORKS" crumbs={crumbs}>
       <SEO
@@ -72,6 +83,23 @@ const CommonPostTemplate: React.FC<Props> = ({
       <article>
         <h1>{title}</h1>
         <Img src={eyecatch.url} alt={eyecatch.alt} />
+          <Grid container direction="row" justify="center" alignItems="center">
+            {/* ロゴ画像がある場合は表示 */}
+            {post.logo && (
+              <img
+                src={post.logo.file.url}
+                alt="logo"
+                height="1rem"
+                className={classes.logo}
+              />
+            )}
+
+            {/* 記事タイトル */}
+            <Typography variant="h3" component="h1" align="center">
+              {title}
+            </Typography>
+          </Grid>
+
 
         {renderRichText(post.body, options)}
       </article>
