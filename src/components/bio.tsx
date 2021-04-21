@@ -25,8 +25,8 @@ const useStyles = makeStyles(() =>
 const Bio = () => {
   const classes = useStyles()
   return (
-    <Grid container justify="space-around">
-      <Grid justify="center" alignItems="center" container xs={12} sm={6}>
+    <Grid justify="space-around" container>
+      <Grid container item xs={12} md={6} justify="center" alignItems="center">
         <StaticImage
           src="../images/icon.png"
           alt="ryohidaka"
@@ -35,14 +35,7 @@ const Bio = () => {
         />
       </Grid>
 
-      <Grid
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-        container
-        xs={12}
-        md={6}
-      >
+      <Grid container item xs={12} md={6} justify="center" alignItems="center">
         <Typography variant="h4" component="h2" align="center">
           <ruby>
             {" "}
