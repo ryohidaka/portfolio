@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link } from "gatsby"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { StaticImage } from "gatsby-plugin-image"
 import { Grid, Typography } from "@material-ui/core"
@@ -18,6 +19,7 @@ const useStyles = makeStyles(() =>
     },
     btn: {
       margin: "0.1rem",
+      textTransform: "none",
     },
   })
 )
@@ -44,19 +46,43 @@ const Bio = () => {
         </Typography>
 
         <Grid container justify="space-between">
-          <Button variant="outlined" color="primary" className={classes.btn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn}
+            component={Link}
+            to="https://twitter.com/ryhidaka"
+          >
             <TwitterIcon className={classes.icon} />
             Twitter
           </Button>
-          <Button variant="outlined" color="primary" className={classes.btn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn}
+            component={Link}
+            to="https://www.facebook.com/ryohidaka12"
+          >
             <FacebookIcon className={classes.icon} />
             Facebook
           </Button>
-          <Button variant="outlined" color="primary" className={classes.btn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn}
+            component={Link}
+            to="https://github.com/ryohidaka"
+          >
             <GitHubIcon className={classes.icon} />
             Github
           </Button>
-          <Button variant="outlined" color="primary" className={classes.btn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn}
+            component={Link}
+            to="https://www.linkedin.com/in/rhidaka/"
+          >
             <LinkedInIcon className={classes.icon} />
             LinkedIn
           </Button>
