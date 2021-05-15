@@ -42,7 +42,7 @@
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^1.0.9",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75"
+    "typeface-montserrat": "1.1.13"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
