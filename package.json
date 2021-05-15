@@ -11,7 +11,7 @@
     "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
     "@formspree/react": "^2.2.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.2",
     "gatsby": "^3.2.1",
     "gatsby-core-utils": "^2.4.0",
     "gatsby-image": "^3.3.0",
